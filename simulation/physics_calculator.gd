@@ -17,6 +17,5 @@ func calculate_force(body, bodies) -> Vector3:
 	for other in bodies:
 		if body != other:
 			var scalar = (G * body.mass * other.mass) / (body.pos.distance_to(other.pos) ** 2)
-			print(scalar)
 			force += (other.pos - body.pos).normalized() * scalar
 	return force
