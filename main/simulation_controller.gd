@@ -1,6 +1,7 @@
 extends Node
 
 var simulation: Simulation 
+var timesteps_per_second = 60
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -10,7 +11,8 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
+	for i in range(0, ceil(timesteps_per_second / delta), 1):
+		simulation.update()
 
 func spawnCelestialBody(pos: Vector3, vel: Vector3, mass: float, radius: float):
 	var body = CelestialBody.new(pos, vel, Vector3.ZERO, mass, radius)
