@@ -4,12 +4,11 @@ class_name Simulation
 const G = 6.6743E-11
 
 # seconds
-var timestep: int
+@export var timestep: int
 var totalTime: int
 
 # All celestial bodies
-var celestial_bodies: Array[CelestialBody]
-
+var celestial_bodies: Array
 
 func _init():
 	timestep = 1
@@ -19,6 +18,3 @@ func _init():
 func update(timestep):
 	for body in celestial_bodies:
 		pass
-
-func spawnCelestialBody(position: Vector3, velocity: Vector3, mass: float, radius: float):
-	celestial_bodies.append(CelestialBody.new(position, velocity, mass, radius))
