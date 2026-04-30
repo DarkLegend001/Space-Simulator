@@ -2,10 +2,10 @@
 
 [ext_resource type="Script" uid="uid://ctqmcany1v6xh" path="res://main/main.gd" id="1_53q0u"]
 [ext_resource type="Script" uid="uid://dsqs3xrlrrvy4" path="res://main/camera.gd" id="2_c651c"]
+[ext_resource type="Script" uid="uid://d3hdk5777lmjw" path="res://main/simulation_controller.gd" id="2_kfbq2"]
 [ext_resource type="Script" uid="uid://b8bvwcoi46ysd" path="res://main/sphere.gd" id="2_pjrb6"]
 [ext_resource type="Texture2D" uid="uid://t3dsj4mralpl" path="res://data/starmap_background.exr" id="2_xwkvk"]
-
-[sub_resource type="SphereMesh" id="SphereMesh_pjrb6"]
+[ext_resource type="Texture2D" uid="uid://cgmdg6ae3jjyv" path="res://data/mars_1k_color.jpg" id="3_3wy1v"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_c651c"]
 panorama = ExtResource("2_xwkvk")
@@ -21,19 +21,26 @@ background_energy_multiplier = 0.75
 sky = SubResource("Sky_3wy1v")
 ambient_light_source = 3
 ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_energy = 1.22
 reflected_light_source = 2
+
+[sub_resource type="SphereMesh" id="SphereMesh_pjrb6"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kfbq2"]
+albedo_texture = ExtResource("3_3wy1v")
 
 [node name="Main" type="Node" unique_id=1603506809]
 script = ExtResource("1_53q0u")
+
+[node name="SimulationController" type="Node" parent="." unique_id=391052692]
+script = ExtResource("2_kfbq2")
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=374710754]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
 script = ExtResource("2_c651c")
 
-[node name="Sphere" type="MeshInstance3D" parent="." unique_id=1824110484]
-transform = Transform3D(0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0, 1, 0, 0, 0)
-mesh = SubResource("SphereMesh_pjrb6")
-script = ExtResource("2_pjrb6")
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=408548995]
+environment = SubResource("Environment_53q0u")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=1923814318]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 2, 0)
@@ -42,5 +49,10 @@ light_negative = true
 omni_range = 50.0
 omni_attenuation = 2.0
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=408548995]
-environment = SubResource("Environment_53q0u")
+[node name="CelestialBodies" type="Node" parent="." unique_id=1477786834]
+
+[node name="Sphere" type="MeshInstance3D" parent="CelestialBodies" unique_id=1824110484]
+transform = Transform3D(0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("SphereMesh_pjrb6")
+surface_material_override/0 = SubResource("StandardMaterial3D_kfbq2")
+script = ExtResource("2_pjrb6")
