@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://df11he65xalwp"]
 
 [ext_resource type="Script" uid="uid://ctqmcany1v6xh" path="res://main/main.gd" id="1_53q0u"]
-[ext_resource type="Script" path="res://main/camera.gd" id="2_c651c"]
+[ext_resource type="Script" uid="uid://dsqs3xrlrrvy4" path="res://main/camera.gd" id="2_c651c"]
 [ext_resource type="Script" uid="uid://d3hdk5777lmjw" path="res://main/simulation_controller.gd" id="2_kfbq2"]
-[ext_resource type="Script" path="res://main/sphere.gd" id="2_pjrb6"]
+[ext_resource type="Script" uid="uid://b8bvwcoi46ysd" path="res://main/sphere.gd" id="2_pjrb6"]
 [ext_resource type="Texture2D" uid="uid://t3dsj4mralpl" path="res://data/starmap_background.exr" id="2_xwkvk"]
 [ext_resource type="Texture2D" uid="uid://cgmdg6ae3jjyv" path="res://data/mars_1k_color.jpg" id="3_3wy1v"]
 
@@ -53,6 +53,7 @@ omni_attenuation = 2.0
 
 [node name="Sphere" type="MeshInstance3D" parent="CelestialBodies" unique_id=1824110484]
 transform = Transform3D(0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0, 1, 0, 0, 0)
+visible = false
 mesh = SubResource("SphereMesh_pjrb6")
 surface_material_override/0 = SubResource("StandardMaterial3D_kfbq2")
 script = ExtResource("2_pjrb6")

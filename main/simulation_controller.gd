@@ -7,7 +7,7 @@ var timesteps_per_second = 60
 func _ready() -> void:
 	print("start")
 	simulation = Simulation.new()
-	spawnCelestialBody(Vector3.ZERO, Vector3(0,0,0.5), 1, 1)
+	spawnCelestialBody(Vector3.ZERO, Vector3.ZERO, 1, 1)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
