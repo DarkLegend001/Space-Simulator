@@ -17,5 +17,4 @@ func _init():
 
 func update():
 	#print("Updating 'Simulation'")
-	for body in celestial_bodies:
-		calculator.integrate_forces(body, celestial_bodies, timestep)
+	calculator.integrate_forces(celestial_bodies, timestep)

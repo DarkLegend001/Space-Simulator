@@ -4,15 +4,18 @@ class_name PhysicsCalculator
 const G = 6.6743E-11
 
 # Verlet Intergration; https://www.algorithm-archive.org/contents/verlet_integration/verlet_integration.html
-# I may need to update the positions of every body before I update the accelerations of everything,
-# but I will do that later if stuff does not go well
-func integrate_forces(body, bodies, timestep):
-	print(body.vel)
-	print(body.accel)
-	var vel_half = body.vel + 0.5 * body.accel * timestep
-	body.pos += vel_half * timestep
-	body.accel = calculate_force(body, bodies) / body.mass
-	body.vel = vel_half + 0.5 * body.accel * timestep
+func integrate_forces(bodies, timestep):
+	for body in bodies: 
+		body.pos += body.vel * timestep + 0.5 * body.accel * timestep ** 2
+	for body in bodies:
+		body.accel_old = body.accel
+	for body in bodies:
+		body.accel = calculate_force(body, bodies) / body.mass
+	for body in bodies:
+		body.vel += 0.5 * (body.accel + body.accel_old) * timestep
+
+func calc_vel(body, timestep):
+	return body.vel_half + 0.5 * body.accel * timestep
 
 func calculate_force(body, bodies) -> Vector3:
 	var force = Vector3.ZERO
