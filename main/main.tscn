@@ -36,4 +36,3 @@ script = SubResource("GDScript_53q0u")
 [node name="CelestialBodies" type="Node" parent="." unique_id=1477786834]
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=511885668]
-zoom = Vector2(0.03, 0.03)

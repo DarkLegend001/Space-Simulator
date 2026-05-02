@@ -7,6 +7,8 @@ const G = 6.6743E-11
 # I may need to update the positions of every body before I update the accelerations of everything,
 # but I will do that later if stuff does not go well
 func integrate_forces(body, bodies, timestep):
+	print(body.vel)
+	print(body.accel)
 	var vel_half = body.vel + 0.5 * body.accel * timestep
 	#print(body.pos)
 	body.pos += vel_half * timestep
