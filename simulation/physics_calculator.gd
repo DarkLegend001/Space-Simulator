@@ -10,9 +10,7 @@ func integrate_forces(body, bodies, timestep):
 	print(body.vel)
 	print(body.accel)
 	var vel_half = body.vel + 0.5 * body.accel * timestep
-	#print(body.pos)
 	body.pos += vel_half * timestep
-	#print(body.pos)
 	body.accel = calculate_force(body, bodies) / body.mass
 	body.vel = vel_half + 0.5 * body.accel * timestep
 

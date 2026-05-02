@@ -1,38 +1,15 @@
 [gd_scene format=3 uid="uid://df11he65xalwp"]
 
 [ext_resource type="Script" uid="uid://ctqmcany1v6xh" path="res://main/main.gd" id="1_53q0u"]
-
-[sub_resource type="GDScript" id="GDScript_53q0u"]
-script/source = "extends Node
-
-var simulation: Simulation 
-var timesteps_per_second = 60
-var renderer = preload(\"res://rendering/celestial_body_renderer.tscn\")
-
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	simulation = Simulation.new()
-	#spawnCelestialBody(Vector3(5.7735, 0, 0), Vector3(0, 0, 3.4), 1e12, 1)
-	spawnCelestialBody(Vector3.ZERO, Vector3(0, 0, 1), 1, 1)
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	simulation.update()
-
-func spawnCelestialBody(pos: Vector3, vel: Vector3, mass: float, radius: float):
-	var body = CelestialBody.new(pos, vel, Vector3.ZERO, mass, radius)
-	simulation.celestial_bodies.append(body)
-	var render = renderer.instantiate() 
-	$\"../CelestialBodies\".add_child(render)
-	render.body = body
-"
+[ext_resource type="Script" uid="uid://d3hdk5777lmjw" path="res://controller/simulation_controller.gd" id="2_pjrb6"]
 
 [node name="Main" type="Node" unique_id=1603506809]
 script = ExtResource("1_53q0u")
 
-[node name="SimulationController" type="Node" parent="." unique_id=391052692]
-script = SubResource("GDScript_53q0u")
-
 [node name="CelestialBodies" type="Node" parent="." unique_id=1477786834]
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=511885668]
+
+[node name="SimulationController" type="Node" parent="." unique_id=1646768611]
+script = ExtResource("2_pjrb6")
+metadata/_custom_type_script = "uid://d3hdk5777lmjw"
