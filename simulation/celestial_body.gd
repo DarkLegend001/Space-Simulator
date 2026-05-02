@@ -8,6 +8,9 @@ var rot_vel: Vector3
 var mass: float
 var radius: float
 
+# Only used in the calculations for other attributes
+var accel_old: Vector3
+
 
 func _init(pos: Vector3, vel: Vector3, rot_vel: Vector3, mass: float, radius: float):
 	self.pos = pos
