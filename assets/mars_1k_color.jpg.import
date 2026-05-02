@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://t3dsj4mralpl"
-path.bptc="res://.godot/imported/starmap_background.exr-25b198687e5a632deba8fde7f1382e82.bptc.ctex"
+uid="uid://cgmdg6ae3jjyv"
+path.s3tc="res://.godot/imported/mars_1k_color.jpg-a8d51263872cbc4e3dab942a1b8bcdd8.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://data/starmap_background.exr"
-dest_files=["res://.godot/imported/starmap_background.exr-25b198687e5a632deba8fde7f1382e82.bptc.ctex"]
+source_file="res://assets/mars_1k_color.jpg"
+dest_files=["res://.godot/imported/mars_1k_color.jpg-a8d51263872cbc4e3dab942a1b8bcdd8.s3tc.ctex"]
 
 [params]
 

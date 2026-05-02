@@ -1,18 +1,11 @@
-[gd_scene format=3 uid="uid://cj4b0pnul7a6a"]
+[gd_scene format=3 uid="uid://layslor8nx5t"]
 
-[ext_resource type="Script" uid="uid://c217lxu6qli4b" path="res://rendering/celestial_body_renderer.gd" id="1_l5vr7"]
-[ext_resource type="Texture2D" uid="uid://cgmdg6ae3jjyv" path="res://data/mars_1k_color.jpg" id="2_5q51l"]
+[ext_resource type="Script" uid="uid://bxw2kk74aytyn" path="res://rendering/celestial_body_renderer.gd" id="1_5a7xl"]
+[ext_resource type="Texture2D" uid="uid://cjewnv4jl631w" path="res://assets/circle.png" id="2_5q51l"]
 
-[sub_resource type="SphereMesh" id="SphereMesh_l5vr7"]
+[node name="CelestialBodyRenderer" type="Node2D" unique_id=1719109220]
+script = ExtResource("1_5a7xl")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xhbbt"]
-albedo_color = Color(1, 1, 1, 0)
-albedo_texture = ExtResource("2_5q51l")
-
-[node name="CelestialBodyRenderer" type="Node3D" unique_id=1844500272]
-transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
-script = ExtResource("1_l5vr7")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=936898943]
-mesh = SubResource("SphereMesh_l5vr7")
-surface_material_override/0 = SubResource("StandardMaterial3D_xhbbt")
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1418927842]
+texture = ExtResource("2_5q51l")
+centered = false

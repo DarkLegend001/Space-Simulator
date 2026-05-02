@@ -1,15 +1,16 @@
-class_name CelestialBodyRenderer extends Node3D
+extends Node2D
 
 var body: CelestialBody
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	print("ready") # Replace with function body.
+	print("'CelestialBodyRenderer' ready")
+
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	position = body.pos
-	rotation = body.rot
+func _process(delta):
+	position = Vector2(body.pos.x, -body.pos.z)
+	print(position)
 
-func _init():
-	print("init")
+func _init() -> void:
+	print("Instantiating new 'CelestialBodyRenderer")

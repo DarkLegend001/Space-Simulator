@@ -8,7 +8,9 @@ const G = 6.6743E-11
 # but I will do that later if stuff does not go well
 func integrate_forces(body, bodies, timestep):
 	var vel_half = body.vel + 0.5 * body.accel * timestep
+	#print(body.pos)
 	body.pos += vel_half * timestep
+	#print(body.pos)
 	body.accel = calculate_force(body, bodies) / body.mass
 	body.vel = vel_half + 0.5 * body.accel * timestep
 

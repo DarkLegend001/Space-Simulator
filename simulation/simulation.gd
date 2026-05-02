@@ -1,7 +1,5 @@
 class_name Simulation
 
-
-
 # seconds
 var timestep: float
 var totalTime: int
@@ -12,11 +10,12 @@ var calculator: PhysicsCalculator
 
 
 func _init():
-	timestep = 0.005
+	timestep = 0.1
 	totalTime = 0
 	celestial_bodies = Array()
 	calculator = PhysicsCalculator.new()
 
 func update():
+	#print("Updating 'Simulation'")
 	for body in celestial_bodies:
 		calculator.integrate_forces(body, celestial_bodies, timestep)

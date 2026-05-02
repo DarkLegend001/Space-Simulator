@@ -1,70 +1,39 @@
 [gd_scene format=3 uid="uid://df11he65xalwp"]
 
 [ext_resource type="Script" uid="uid://ctqmcany1v6xh" path="res://main/main.gd" id="1_53q0u"]
-[ext_resource type="Script" uid="uid://dsqs3xrlrrvy4" path="res://main/camera.gd" id="2_c651c"]
-[ext_resource type="Script" uid="uid://d3hdk5777lmjw" path="res://main/simulation_controller.gd" id="2_kfbq2"]
-[ext_resource type="Script" uid="uid://b8bvwcoi46ysd" path="res://main/sphere.gd" id="2_pjrb6"]
-[ext_resource type="Texture2D" uid="uid://t3dsj4mralpl" path="res://data/starmap_background.exr" id="2_xwkvk"]
-[ext_resource type="Texture2D" uid="uid://cgmdg6ae3jjyv" path="res://data/mars_1k_color.jpg" id="3_3wy1v"]
 
-[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_c651c"]
-panorama = ExtResource("2_xwkvk")
-filter = false
-energy_multiplier = 5.78
+[sub_resource type="GDScript" id="GDScript_53q0u"]
+script/source = "extends Node
 
-[sub_resource type="Sky" id="Sky_3wy1v"]
-sky_material = SubResource("PanoramaSkyMaterial_c651c")
+var simulation: Simulation 
+var timesteps_per_second = 60
+var renderer = preload(\"res://rendering/celestial_body_renderer.tscn\")
 
-[sub_resource type="Environment" id="Environment_53q0u"]
-background_mode = 2
-background_color = Color(1, 1, 1, 1)
-background_energy_multiplier = 0.75
-sky = SubResource("Sky_3wy1v")
-ambient_light_source = 3
-ambient_light_color = Color(1, 1, 1, 1)
-ambient_light_energy = 1.22
-reflected_light_source = 2
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	simulation = Simulation.new()
+	#spawnCelestialBody(Vector3(5.7735, 0, 0), Vector3(0, 0, 3.4), 1e12, 1)
+	spawnCelestialBody(Vector3.ZERO, Vector3(0, 0, 1), 1, 1)
 
-[sub_resource type="SphereMesh" id="SphereMesh_pjrb6"]
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	simulation.update()
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kfbq2"]
-albedo_texture = ExtResource("3_3wy1v")
-
-[sub_resource type="SphereMesh" id="SphereMesh_kfbq2"]
+func spawnCelestialBody(pos: Vector3, vel: Vector3, mass: float, radius: float):
+	var body = CelestialBody.new(pos, vel, Vector3.ZERO, mass, radius)
+	simulation.celestial_bodies.append(body)
+	var render = renderer.instantiate() 
+	$\"../CelestialBodies\".add_child(render)
+	render.body = body
+"
 
 [node name="Main" type="Node" unique_id=1603506809]
 script = ExtResource("1_53q0u")
 
 [node name="SimulationController" type="Node" parent="." unique_id=391052692]
-script = ExtResource("2_kfbq2")
-
-[node name="Camera3D" type="Camera3D" parent="." unique_id=374710754]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 20, 0)
-script = ExtResource("2_c651c")
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=408548995]
-environment = SubResource("Environment_53q0u")
+script = SubResource("GDScript_53q0u")
 
 [node name="CelestialBodies" type="Node" parent="." unique_id=1477786834]
 
-[node name="Sphere" type="MeshInstance3D" parent="CelestialBodies" unique_id=1824110484]
-transform = Transform3D(0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0, 1, 0, 0, 0)
-visible = false
-mesh = SubResource("SphereMesh_pjrb6")
-surface_material_override/0 = SubResource("StandardMaterial3D_kfbq2")
-script = ExtResource("2_pjrb6")
-
-[node name="Sun" type="Node3D" parent="." unique_id=1737690398]
-
-[node name="OmniLight3D" type="OmniLight3D" parent="Sun" unique_id=1923814318]
-light_energy = 2.0
-light_size = 0.5
-light_negative = true
-omni_range = 4000.0
-omni_attenuation = 0.0
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Sun" unique_id=943137751]
-transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0)
-visible = false
-cast_shadow = 0
-mesh = SubResource("SphereMesh_kfbq2")
+[node name="Camera2D" type="Camera2D" parent="." unique_id=511885668]
+zoom = Vector2(0.03, 0.03)
