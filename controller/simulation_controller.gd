@@ -18,8 +18,6 @@ func _process(delta: float) -> void:
 
 func spawn_celestial_body(pos: Vector3, vel: Vector3, mass: float, radius: float):
 	var body = CelestialBody.new(pos, vel, Vector3.ZERO, mass, radius)
-	print(body.mass)
-	print("making body")
 	simulation.celestial_bodies.append(body)
 	var render = renderer.instantiate() 
 	$"../CelestialBodies".add_child(render)

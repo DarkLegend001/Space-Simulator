@@ -17,4 +17,5 @@ script = ExtResource("2_xwkvk")
 
 [node name="SimulationController" type="Node" parent="." unique_id=1646768611]
 script = ExtResource("2_pjrb6")
+speed = 200
 metadata/_custom_type_script = "uid://d3hdk5777lmjw"

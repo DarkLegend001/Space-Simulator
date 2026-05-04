@@ -11,7 +11,7 @@ func _process(delta):
 
 
 func _init() -> void:
-	print("Instantiating new 'CelestialBodyRenderer")
+	print("Instantiating new 'CelestialBodyRenderer'")
 
 func _draw():
 	draw_circle(Vector2.ZERO, body.radius / Globals.size_scale, colour)
