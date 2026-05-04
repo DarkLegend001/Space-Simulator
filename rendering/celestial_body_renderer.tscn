@@ -13,5 +13,6 @@ albedo_texture = ExtResource("2_5q51l")
 script = ExtResource("1_l5vr7")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=936898943]
+transform = Transform3D(50, 0, 0, 0, 50, 0, 0, 0, 50, 0, 0, 0)
 mesh = SubResource("SphereMesh_l5vr7")
 surface_material_override/0 = SubResource("StandardMaterial3D_xhbbt")
