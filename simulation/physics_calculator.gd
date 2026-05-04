@@ -13,6 +13,7 @@ func integrate_forces(bodies, timestep):
 		body.accel = calculate_force(body, bodies) / body.mass
 	for body in bodies:
 		body.vel += 0.5 * (body.accel + body.accel_old) * timestep
+	
 
 func calc_vel(body, timestep):
 	return body.vel_half + 0.5 * body.accel * timestep

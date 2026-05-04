@@ -6,7 +6,7 @@ var colour: Color
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if (body):
-		position = Vector2(body.pos.x / Globals.distance_scale, -body.pos.z / Globals.size_scale)
+		position = Vector2(body.pos.x / Globals.distance_scale, -body.pos.z / Globals.distance_scale)
 		queue_redraw()
 
 
