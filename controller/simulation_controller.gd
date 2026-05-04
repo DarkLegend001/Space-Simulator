@@ -7,8 +7,8 @@ var renderer = preload("res://rendering/celestial_body_renderer.tscn")
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	simulation = Simulation.new()
-	spawn_celestial_body(Vector3(100, 0, 0), Vector3(0, 0, 0.5), 1e12, 1)
-	spawn_celestial_body(Vector3.ZERO, Vector3(0, 0, -0.5), 1e12, 1)
+	spawn_celestial_body(Vector3(100, 0, 0), Vector3(0, 0, 0.5), 1e12, 25)
+	spawn_celestial_body(Vector3.ZERO, Vector3(0, 0, -0.5), 1e12, 25)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

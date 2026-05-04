@@ -1,12 +1,6 @@
 [gd_scene format=3 uid="uid://layslor8nx5t"]
 
 [ext_resource type="Script" uid="uid://bxw2kk74aytyn" path="res://rendering/celestial_body_renderer.gd" id="1_5a7xl"]
-[ext_resource type="Texture2D" uid="uid://cjewnv4jl631w" path="res://assets/circle.png" id="2_5q51l"]
 
 [node name="CelestialBodyRenderer" type="Node2D" unique_id=1719109220]
 script = ExtResource("1_5a7xl")
-
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1418927842]
-scale = Vector2(0.05, 0.05)
-texture = ExtResource("2_5q51l")
-centered = false

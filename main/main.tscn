@@ -2,13 +2,18 @@
 
 [ext_resource type="Script" uid="uid://ctqmcany1v6xh" path="res://main/main.gd" id="1_53q0u"]
 [ext_resource type="Script" uid="uid://d3hdk5777lmjw" path="res://controller/simulation_controller.gd" id="2_pjrb6"]
+[ext_resource type="Script" uid="uid://0oxkldnlxe3j" path="res://main/camera_2d.gd" id="2_xwkvk"]
+
+[sub_resource type="GDScript" id="GDScript_xwkvk"]
 
 [node name="Main" type="Node" unique_id=1603506809]
 script = ExtResource("1_53q0u")
 
 [node name="CelestialBodies" type="Node" parent="." unique_id=1477786834]
+script = SubResource("GDScript_xwkvk")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=511885668]
+script = ExtResource("2_xwkvk")
 
 [node name="SimulationController" type="Node" parent="." unique_id=1646768611]
 script = ExtResource("2_pjrb6")
