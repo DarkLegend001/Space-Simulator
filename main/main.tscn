@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://df11he65xalwp"]
 
 [ext_resource type="Script" uid="uid://ctqmcany1v6xh" path="res://main/main.gd" id="1_53q0u"]
-[ext_resource type="Script" path="res://main/camera.gd" id="2_c651c"]
+[ext_resource type="Script" uid="uid://dsqs3xrlrrvy4" path="res://main/camera.gd" id="2_c651c"]
 [ext_resource type="Script" uid="uid://blhqjkxxbsqqh" path="res://controller/simulation_controller.gd" id="2_kfbq2"]
 [ext_resource type="Texture2D" uid="uid://t3dsj4mralpl" path="res://data/starmap_background.exr" id="2_xwkvk"]
 
@@ -12,6 +12,7 @@ energy_multiplier = 5.78
 
 [sub_resource type="Sky" id="Sky_3wy1v"]
 sky_material = SubResource("PanoramaSkyMaterial_c651c")
+radiance_size = 2
 
 [sub_resource type="Environment" id="Environment_53q0u"]
 background_mode = 2
@@ -38,7 +39,6 @@ environment = SubResource("Environment_53q0u")
 [node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=1923814318]
 light_energy = 10.0
 light_size = 0.5
-light_negative = true
 omni_range = 1000.0
 
 [node name="CelestialBodies" type="Node" parent="." unique_id=1477786834]
