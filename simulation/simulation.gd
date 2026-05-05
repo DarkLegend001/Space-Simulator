@@ -10,7 +10,7 @@ var calculator: PhysicsCalculator
 
 
 func _init():
-	timestep = 1
+	timestep = 60
 	totalTime = 0
 	celestial_bodies = Array()
 	calculator = PhysicsCalculator.new()

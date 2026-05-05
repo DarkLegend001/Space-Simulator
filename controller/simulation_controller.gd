@@ -2,7 +2,7 @@ class_name SimulationController extends Node
 
 var simulation: Simulation 
 # timesteps per frame
-@export var speed := 30
+@export var speed := 1000
 var renderer = preload("res://rendering/celestial_body_renderer.tscn")
 
 # Called when the node enters the scene tree for the first time.
