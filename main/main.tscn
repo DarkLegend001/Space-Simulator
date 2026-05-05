@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://ctqmcany1v6xh" path="res://main/main.gd" id="1_53q0u"]
 [ext_resource type="Script" uid="uid://dsqs3xrlrrvy4" path="res://main/camera.gd" id="2_c651c"]
 [ext_resource type="Script" uid="uid://blhqjkxxbsqqh" path="res://controller/simulation_controller.gd" id="2_kfbq2"]
-[ext_resource type="Texture2D" uid="uid://t3dsj4mralpl" path="res://data/starmap_background.exr" id="2_xwkvk"]
+[ext_resource type="Texture2D" uid="uid://t3dsj4mralpl" path="res://assets/starmap_background.exr" id="2_xwkvk"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_c651c"]
 panorama = ExtResource("2_xwkvk")
