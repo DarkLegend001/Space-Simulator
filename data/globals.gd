@@ -1,11 +1,5 @@
 extends Node
 
-
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+# Defines how many metres corresponds with one position unit of Godot
+@export var distance_scale: int = 1e9
+@export var size_scale: int = 7e5
