@@ -8,16 +8,37 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	var change = delta * 0.5
+	var change = delta * 50
+	var speed = Vector3.ZERO
+	var rot_change = delta * 1
+	var rot_speed = Vector3.ZERO
 	if Input.is_action_pressed("camera_right"):
-		position.x += change
+		speed.x += change
 	if Input.is_action_pressed("camera_left"):
-		position.x -= change
+		speed.x -= change
 	if Input.is_action_pressed("camera_up"):
-		position.y += change
+		speed.y += change
 	if Input.is_action_pressed("camera_down"):
-		position.y -= change
+		speed.y -= change
 	if Input.is_action_pressed("camera_forward"):
-		position.z -= change
+		speed.z -= change
 	if Input.is_action_pressed("camera_back"):
-		position.z += change
+		speed.z += change
+	
+	if Input.is_action_pressed("camera_rotate_right"):
+		rot_speed.x -= rot_change
+	if Input.is_action_pressed("camera_rotate_left"):
+		rot_speed.x += rot_change
+	if Input.is_action_pressed("camera_rotate_up"):
+		rot_speed.y += rot_change
+	if Input.is_action_pressed("camera_rotate_down"):
+		rot_speed.y -= rot_change
+	if Input.is_action_pressed("camera_roll_right"):
+		rot_speed.z += rot_change
+	if Input.is_action_pressed("camera_roll_left"):
+		rot_speed.z -= rot_change
+	
+	position += (transform.basis * speed)
+	rotate_object_local(Vector3.UP, rot_speed.x)
+	rotate_object_local(Vector3.RIGHT, rot_speed.y)
+	rotate_object_local(Vector3.FORWARD, rot_speed.z)
