@@ -1,13 +1,11 @@
-extends MeshInstance3D
+extends Node
 
-var increment = 0
+var sim_body: CelestialBodySimulation
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass # Replace with function body.
 
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	increment += delta
-	position.x += sin(increment) * delta
-	position.z += cos(increment) * delta
+	pass
