@@ -9,8 +9,7 @@ var sun_renderer = preload("res://rendering/sun_renderer.tscn")
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	simulation = Simulation.new()
-	spawn_sun("Sun", Vector3.ZERO, Vector3.ZERO, 1.98842e30, 39570000, 100, Color(1.0, 1.0, 0.784, 1.0))
-	#spawn_celestial_body("Sun", Vector3.ZERO, Vector3.ZERO, 1.98842e30, 39570000, Color(1.0, 1.0, 0.784, 1.0))
+	spawn_sun("Sun", Vector3.ZERO, Vector3.ZERO, 1.98842e30, 39570000, 100, Color(1.0, 1.0, 0.392, 1.0))
 	load_presets()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
