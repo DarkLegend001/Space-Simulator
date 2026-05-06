@@ -1,11 +1,9 @@
 [gd_scene format=3 uid="uid://cyml8ii1cpj8n"]
 
 [ext_resource type="Script" uid="uid://bu0ekytv21yp6" path="res://main/celestial_body.gd" id="1_0drj4"]
-[ext_resource type="Script" uid="uid://c217lxu6qli4b" path="res://rendering/celestial_body_renderer.gd" id="1_a24x4"]
+[ext_resource type="PackedScene" uid="uid://cj4b0pnul7a6a" path="res://rendering/celestial_body_renderer.tscn" id="2_0drj4"]
 
 [node name="CelestialBody" type="Node" unique_id=443886391]
 script = ExtResource("1_0drj4")
 
-[node name="CelestialBodyRenderer" type="Node3D" parent="." unique_id=1872777266]
-script = ExtResource("1_a24x4")
-metadata/_custom_type_script = "uid://c217lxu6qli4b"
+[node name="CelestialBodyRenderer" parent="." unique_id=1844500272 instance=ExtResource("2_0drj4")]

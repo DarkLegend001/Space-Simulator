@@ -11,7 +11,7 @@ func _ready() -> void:
 	scale = Vector3.ONE * (sim_body.radius / Globals.size_scale)
 	
 	$Mesh.set_surface_override_material(0, load("res://assets/default_body.tres").duplicate())
-	#$Mesh.get_surface_override_material(0).albedo_color = colour
+	$Mesh.get_surface_override_material(0).albedo_color = colour
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
