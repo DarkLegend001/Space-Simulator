@@ -19,7 +19,7 @@ func _process(delta: float) -> void:
 	for i in range(0, speed):
 		simulation.update()
 
-func spawn_celestial_body(title: String, pos: Vector3, vel: Vector3, mass: float, radius: float, color: Color):
+func spawn_celestial_body(title: String, pos: Vector3, vel: Vector3, mass: float, radius: float, colour: Color):
 	var sim_body = CelestialBodySimulation.new(pos, vel, Vector3.ZERO, mass, radius)
 	simulation.celestial_bodies.append(sim_body)
 	var body = celestial_body_scene.instantiate() 
@@ -27,7 +27,7 @@ func spawn_celestial_body(title: String, pos: Vector3, vel: Vector3, mass: float
 	$"../CelestialBodies".add_child(body)
 	bodies.append(body)
 
-func spawn_sun(title: String, pos: Vector3, vel: Vector3, mass: float, radius: float, energy: float, color: Color):
+func spawn_sun(title: String, pos: Vector3, vel: Vector3, mass: float, radius: float, energy: float, colour: Color):
 	var sim_body = SunSimulation.new(pos, vel, Vector3.ZERO, mass, radius, energy)
 	simulation.celestial_bodies.append(sim_body)
 	var body = celestial_body_scene.instantiate() 
