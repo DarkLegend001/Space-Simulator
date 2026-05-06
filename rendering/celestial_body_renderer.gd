@@ -7,9 +7,11 @@ var following: bool = false
 func _ready() -> void:
 	print("Instantiating CelestialBodyRenderer")
 	scale = Vector3.ONE * (body.radius / Globals.size_scale)
-	
-	$Mesh.set_surface_override_material(0, load("res://assets/default_body.tres").duplicate())
-	$Mesh.get_surface_override_material(0).albedo_color = body.color
+	set_mesh()
+
+func set_mesh():
+	$Mesh.material_overlay = load("res://assets/default_body.tres").duplicate()
+	$Mesh.material_overlay.albedo_color = body.color
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
