@@ -1,12 +1,22 @@
 class_name CelestialBodyRenderer extends Node3D
 
 var body: CelestialBody
+var following: bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	print("Instantiating 'CelstialBodyRenderer")
+	print("Instantiating CelestialBodyRenderer")
+	scale = Vector3.ONE * (body.radius / Globals.size_scale)
 	
+	$Mesh.set_surface_override_material(0, load("res://assets/default_body.tres").duplicate())
+	$Mesh.get_surface_override_material(0).albedo_color = body.color
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
 	position = body.pos / Globals.distance_scale
 	rotation = body.rot
+	if (following):
+		$"../../Camera3D".move(body.vel / Globals.size_scale)
+
+func set_following(following: bool):
+	self.following = following

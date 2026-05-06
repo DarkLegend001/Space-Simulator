@@ -1,7 +1,7 @@
 class_name PhysicsCalculator
 
 # N*m^2*kg^-2
-const G = 6.6743E-11# update rotation
+const G = 6.6743E-11
 
 # Verlet Intergration; https://www.algorithm-archive.org/contents/verlet_integration/verlet_integration.html
 func integrate_forces(bodies, timestep):
