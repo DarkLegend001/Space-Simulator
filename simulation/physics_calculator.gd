@@ -1,16 +1,17 @@
 class_name PhysicsCalculator
 
-# N*m^2*kg^-2
-const G = 6.6743E-11
+# not E-11 because not using SI units
+const G = 6.6743E4
 
 # Verlet Intergration; https://www.algorithm-archive.org/contents/verlet_integration/verlet_integration.html
 func integrate_forces(bodies, timestep):
 	for body in bodies: 
 		body.pos += body.vel * timestep + 0.5 * body.accel * timestep ** 2
+		print(body.pos)
 	for body in bodies:
 		body.accel_old = body.accel
 	for body in bodies:
-		body.accel = calculate_force(body, bodies) / body.mass
+		body.accel = calculate_force(body, bodies) / body.mass * 1E-9
 	for body in bodies:
 		body.vel += 0.5 * (body.accel + body.accel_old) * timestep
 	for body in bodies:
