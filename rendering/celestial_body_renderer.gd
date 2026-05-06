@@ -7,9 +7,9 @@ var following: bool = false
 func _ready() -> void:
 	print("Instantiating CelestialBodyRenderer")
 	scale = Vector3.ONE * (body.radius / Globals.size_scale)
-	set_mesh()
+	set_material()
 
-func set_mesh():
+func set_material():
 	$Mesh.material_overlay = load("res://assets/default_body.tres").duplicate()
 	$Mesh.material_overlay.albedo_color = body.color
 
