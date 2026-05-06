@@ -6,5 +6,8 @@ func _ready():
 	scale = Vector3.ONE * (sim_body.radius / Globals.size_scale)
 	$Light.light_energy = sim_body.energy
 
+func set_material():
+	pass
+
 func _process(delta: float):
 	super(delta)
