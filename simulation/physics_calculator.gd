@@ -7,7 +7,6 @@ const G = 6.6743E-17
 func integrate_forces(bodies, timestep):
 	for body in bodies: 
 		body.pos += body.vel * timestep + 0.5 * body.accel * timestep ** 2
-		print(body.pos)
 	for body in bodies:
 		body.accel_old = body.accel
 	for body in bodies:

@@ -15,6 +15,7 @@ sky_material = SubResource("PanoramaSkyMaterial_c651c")
 radiance_size = 2
 
 [sub_resource type="Environment" id="Environment_53q0u"]
+background_mode = 2
 background_energy_multiplier = 0.75
 sky = SubResource("Sky_3wy1v")
 ambient_light_source = 3
@@ -26,7 +27,7 @@ script = ExtResource("1_53q0u")
 
 [node name="SimulationController" type="Node" parent="." unique_id=391052692]
 script = ExtResource("2_kfbq2")
-speed = 1000
+speed = null
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=374710754]
 transform = Transform3D(1, 0, 0, 0, 1.1924881e-08, 1, 0, -1, 1.1924881e-08, 0, 200, 0)
