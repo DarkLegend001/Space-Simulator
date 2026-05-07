@@ -3,7 +3,7 @@ class_name SimulationController extends Node
 var simulation: Simulation
 var bodies: Array 
 # timesteps per frame
-@export var speed := 1000
+@export var speed := 50
 var celestial_body_scene = preload("res://main/celestial_body.tscn")
 var celestial_body_renderer = preload("res://rendering/celestial_body_renderer.tscn")
 var sun_renderer = preload("res://rendering/sun_renderer.tscn")
