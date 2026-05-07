@@ -1,7 +1,7 @@
 class_name PhysicsCalculator
 
 # not E-11 because not using SI units
-const G = 6.6743E4
+const G = 6.6743E-17
 
 # Verlet Intergration; https://www.algorithm-archive.org/contents/verlet_integration/verlet_integration.html
 func integrate_forces(bodies, timestep):
