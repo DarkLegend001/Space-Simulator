@@ -1,6 +1,6 @@
 class_name CelestialBodyRenderer extends Node3D
 
-var colour: Color
+var color: Color
 var following: bool = false
 var sim_body: CelestialBodySimulation
 
@@ -11,13 +11,13 @@ func _ready() -> void:
 	scale = Vector3.ONE * (sim_body.radius / Globals.size_scale)
 	
 	$Mesh.set_surface_override_material(0, load("res://assets/default_body.tres").duplicate())
-	$Mesh.get_surface_override_material(0).albedo_color = colour
+	$Mesh.get_surface_override_material(0).albedo_color = color
 	scale = Vector3.ONE * (sim_body.radius / Globals.size_scale)
 	set_material()
 
 func set_material():
 	$Mesh.material_overlay = load("res://assets/default_body.tres").duplicate()
-	$Mesh.material_overlay.albedo_color = colour
+	$Mesh.material_overlay.albedo_color = color
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
