@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://di5phej5sur1a"]
 
-[ext_resource type="Script" uid="uid://ct0k2i8fdn4pf" path="res://orbital_path_renderer.gd" id="1_xtdxp"]
+[ext_resource type="Script" uid="uid://ct0k2i8fdn4pf" path="res://rendering/celestial_path_renderer.gd" id="1_ew3ee"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xtdxp"]
 shading_mode = 0
@@ -14,7 +14,7 @@ _data = {
 point_count = 3
 
 [node name="CurveRenderer" type="Node3D" unique_id=420173815]
-script = ExtResource("1_xtdxp")
+script = ExtResource("1_ew3ee")
 
 [node name="CurvePolygon" type="CSGPolygon3D" parent="." unique_id=222001468]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)

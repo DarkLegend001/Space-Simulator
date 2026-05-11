@@ -1,4 +1,4 @@
-class_name curve_renderer extends Node3D
+class_name CelestialPathRenderer extends Node3D
 
 var color: Color
 
