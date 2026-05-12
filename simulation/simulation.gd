@@ -1,5 +1,5 @@
 class_name Simulation
-
+extends Resource
 # seconds
 var timestep: float
 var totalTime: int
