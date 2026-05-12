@@ -2,8 +2,13 @@
 
 [ext_resource type="Script" uid="uid://bu0ekytv21yp6" path="res://main/celestial_body.gd" id="1_0drj4"]
 [ext_resource type="PackedScene" uid="uid://cj4b0pnul7a6a" path="res://rendering/celestial_body_renderer.tscn" id="2_0drj4"]
+[ext_resource type="Script" uid="uid://ct0k2i8fdn4pf" path="res://rendering/celestial_path_renderer.gd" id="3_rt2s2"]
 
 [node name="CelestialBody" type="Node" unique_id=443886391]
 script = ExtResource("1_0drj4")
 
 [node name="CelestialBodyRenderer" parent="." unique_id=1844500272 instance=ExtResource("2_0drj4")]
+
+[node name="CelestialPathRenderer" type="Node3D" parent="." unique_id=1221880140]
+script = ExtResource("3_rt2s2")
+metadata/_custom_type_script = "uid://ct0k2i8fdn4pf"
