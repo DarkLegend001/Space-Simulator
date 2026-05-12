@@ -5,13 +5,10 @@ var bodies: Array
 # timesteps per frame
 @export var speed := 50
 var celestial_body_scene = preload("res://main/celestial_body.tscn")
-var celestial_body_renderer = preload("res://rendering/celestial_body_renderer.tscn")
-var sun_renderer = preload("res://rendering/sun_renderer.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	simulation = Simulation.new()
-	#spawn_sun("Sun", Vector3.ZERO, Vector3.ZERO, 1.98842e30, 39570000, 100, Color(1.0, 1.0, 0.392, 1.0))
 	load_presets()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -25,15 +22,6 @@ func spawn_celestial_body(title: String, pos: Vector3, vel: Vector3, mass: float
 	var body = celestial_body_scene.instantiate() 
 	body.sim_body = sim_body
 	body.get_child(0).color = color
-	$"../CelestialBodies".add_child(body)
-	bodies.append(body)
-	
-
-func spawn_sun(title: String, pos: Vector3, vel: Vector3, mass: float, radius: float, energy: float, color: Color):
-	var sim_body = SunSimulation.new(pos, vel, Vector3.ZERO, mass, radius, energy)
-	simulation.celestial_bodies.append(sim_body)
-	var body = celestial_body_scene.instantiate() 
-	body.sim_body = sim_body
 	$"../CelestialBodies".add_child(body)
 	bodies.append(body)
 

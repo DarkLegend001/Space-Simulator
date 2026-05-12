@@ -27,7 +27,6 @@ script = ExtResource("1_53q0u")
 
 [node name="SimulationController" type="Node" parent="." unique_id=391052692]
 script = ExtResource("2_kfbq2")
-speed = null
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=374710754]
 transform = Transform3D(1, 0, 0, 0, 1.1924881e-08, 1, 0, -1, 1.1924881e-08, 0, 200, 0)
