@@ -1,30 +1,30 @@
-[gd_scene format=3 uid="uid://di5phej5sur1a"]
+[gd_scene format=3 uid="uid://bvljaygsycpoc"]
 
-[ext_resource type="Script" uid="uid://ct0k2i8fdn4pf" path="res://rendering/celestial_path_renderer.gd" id="1_ew3ee"]
+[ext_resource type="Script" uid="uid://curgh8snrobmj" path="res://rendering/celestial_path_renderer.gd" id="1_ew3ee"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xtdxp"]
 shading_mode = 0
 albedo_color = Color(0.39607844, 0.85882354, 1, 1)
 
 [sub_resource type="Curve3D" id="Curve3D_bb585"]
+bake_interval = 1.0
 _data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5.5, 0, 0, 0, 0, 0, 0, 0, 0, 5, 5, 0),
-"tilts": PackedFloat32Array(0, 0, 0)
+"points": PackedVector3Array(0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5.5, 0, 0, 0, 0, 0, 0, 0, 0, 5, 5, 0, 0, 0, 0, 0, 0, 0, 3, 3, 0),
+"tilts": PackedFloat32Array(0, 0, 0, 0)
 }
-point_count = 3
+point_count = 4
 
 [node name="CurveRenderer" type="Node3D" unique_id=420173815]
 script = ExtResource("1_ew3ee")
 
 [node name="CurvePolygon" type="CSGPolygon3D" parent="." unique_id=222001468]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 calculate_tangents = false
 polygon = PackedVector2Array(1, 0, 0.924, 0.383, 0.707, 0.707, 0.383, 0.924, 0, 1, -0.383, 0.924, -0.707, 0.707, -0.924, 0.383, -1, 0, -0.924, -0.383, -0.707, -0.707, -0.383, -0.924, 0, -1, 0.383, -0.924, 0.707, -0.707, 0.707, -0.707)
 mode = 2
 path_node = NodePath("Path")
 path_interval_type = 0
 path_interval = 1.0
-path_simplify_angle = 1.0
+path_simplify_angle = 0.5
 path_rotation = 2
 path_rotation_accurate = false
 path_local = false
