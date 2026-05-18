@@ -1,5 +1,5 @@
 class_name Simulation
-
+extends Resource
 # seconds
 var timestep: float
 var totalTime: int
@@ -10,7 +10,7 @@ var calculator: PhysicsCalculator
 
 
 func _init():
-	timestep = 100
+	timestep = 5
 	totalTime = 0
 	celestial_bodies = Array()
 	calculator = PhysicsCalculator.new()

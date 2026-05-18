@@ -1,41 +1,45 @@
 class_name SimulationController extends Node
 
-var simulation: Simulation
+var main_simulation: Simulation
 var bodies: Array 
+var paths: Array
 # timesteps per frame
 @export var speed := 50
+# number of timesteps for prediction
+@export var prediction_length := 30
+# size of prediction timesteps 
+@export var prediction_timestep_size := 3600
 var celestial_body_scene = preload("res://main/celestial_body.tscn")
-var celestial_body_renderer = preload("res://rendering/celestial_body_renderer.tscn")
-var sun_renderer = preload("res://rendering/sun_renderer.tscn")
+var celestial_path_scene = preload("res://rendering/celestial_path_renderer.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	simulation = Simulation.new()
-	#spawn_sun("Sun", Vector3.ZERO, Vector3.ZERO, 1.98842e30, 39570000, 100, Color(1.0, 1.0, 0.392, 1.0))
+	main_simulation = Simulation.new()
 	load_presets()
+	for i in bodies.size():
+		spawn_celestial_path()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	for i in range(0, speed):
-		simulation.update()
+		main_simulation.update()
+	var curves = get_curves()
+	for i in paths.size():
+		paths[i].set_curve(curves[i])
 
 func spawn_celestial_body(title: String, pos: Vector3, vel: Vector3, mass: float, radius: float, color: Color):
 	var sim_body = CelestialBodySimulation.new(pos, vel, Vector3.ZERO, mass, radius)
-	simulation.celestial_bodies.append(sim_body)
+	main_simulation.celestial_bodies.append(sim_body)
 	var body = celestial_body_scene.instantiate() 
 	body.sim_body = sim_body
 	body.get_child(0).color = color
 	$"../CelestialBodies".add_child(body)
 	bodies.append(body)
-	
 
-func spawn_sun(title: String, pos: Vector3, vel: Vector3, mass: float, radius: float, energy: float, color: Color):
-	var sim_body = SunSimulation.new(pos, vel, Vector3.ZERO, mass, radius, energy)
-	simulation.celestial_bodies.append(sim_body)
-	var body = celestial_body_scene.instantiate() 
-	body.sim_body = sim_body
-	$"../CelestialBodies".add_child(body)
-	bodies.append(body)
+func spawn_celestial_path():
+	var path = celestial_path_scene.instantiate()
+	$"../CelestialPaths".add_child(path)
+	paths.append(path)
 
 func load_presets(): 
 	var file = FileAccess.open("res://data/presets.txt", FileAccess.READ)
@@ -52,4 +56,16 @@ func load_presets():
 		var color = Color.from_rgba8(int(elements[9]), int(elements[10]), int(elements[11]), int(elements[12]))
 		
 		spawn_celestial_body(title, pos, vel, mass, radius, color)
-	
+
+# This method relies on the order of bodies being consistent in all arrays
+func get_curves() -> Array:
+	var curves := Array()
+	var prediction_sim = main_simulation
+	prediction_sim.timestep = prediction_timestep_size
+	for body in bodies:
+		curves.append(Curve3D.new())
+	for i in prediction_length:
+		prediction_sim.update()
+		for j in prediction_sim.celestial_bodies.size():
+			curves[j].add_point(prediction_sim.celestial_bodies[j].pos)
+	return curves
