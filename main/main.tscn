@@ -23,6 +23,7 @@ ambient_light_color = Color(1, 1, 1, 1)
 reflected_light_source = 2
 
 [node name="Main" type="Node" unique_id=1603506809]
+physics_interpolation_mode = 2
 script = ExtResource("1_53q0u")
 
 [node name="SimulationController" type="Node" parent="." unique_id=391052692]

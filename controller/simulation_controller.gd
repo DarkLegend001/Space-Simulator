@@ -11,6 +11,9 @@ func _ready() -> void:
 	simulation = Simulation.new()
 	load_presets()
 
+func move_camera(velocity: Vector3):
+	$"../Camera3D".move(velocity * speed * simulation.timestep / Globals.distance_scale)
+	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	for i in range(0, speed):

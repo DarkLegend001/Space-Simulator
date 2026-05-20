@@ -10,7 +10,7 @@ func move(dir: Vector3):
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	var change = delta * 50
+	var change = delta * 1e5 / Globals.distance_scale
 	var speed = Vector3.ZERO
 	var rot_change = delta * 1
 	var rot_speed = Vector3.ZERO
@@ -40,7 +40,7 @@ func _process(delta: float) -> void:
 	if Input.is_action_pressed("camera_roll_left"):
 		rot_speed.z -= rot_change
 	
-	position += (transform.basis * speed)
+	move(transform.basis * speed)
 	rotate_object_local(Vector3.UP, rot_speed.x)
 	rotate_object_local(Vector3.RIGHT, rot_speed.y)
 	rotate_object_local(Vector3.FORWARD, rot_speed.z)

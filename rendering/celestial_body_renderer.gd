@@ -1,9 +1,10 @@
 class_name CelestialBodyRenderer extends Node3D
 
-var color: Color
-var following: bool = false
+@export var color: Color
+@export var following: bool = false
+@export var luminance: float
+
 var sim_body: CelestialBodySimulation
-var luminance: float
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -36,7 +37,8 @@ func _process(_delta: float) -> void:
 	position = sim_body.pos / Globals.distance_scale
 	rotation = sim_body.rot
 	if (following):
-		$"../../Camera3D".move(sim_body.vel / Globals.size_scale)
+		$"../../../SimulationController".move_camera(sim_body.vel)
+		print($"../../../Camera3D".position)
 
 func set_following(following: bool):
 	self.following = following
