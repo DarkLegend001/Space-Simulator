@@ -27,6 +27,7 @@ func set_light():
 		else:
 			$Light.light_energy = luminance
 			$Light.light_size = sim_body.radius / Globals.size_scale
+			$Light.omni_range = 2e5 / Globals.distance_scale
 			$Mesh.cast_shadow = false
 			$Mesh.material_overlay.shading_mode = 0
 			print("making light")
@@ -38,7 +39,6 @@ func _process(_delta: float) -> void:
 	rotation = sim_body.rot
 	if (following):
 		$"../../../SimulationController".move_camera(sim_body.vel)
-		print($"../../../Camera3D".position)
 
 func set_following(following: bool):
 	self.following = following
