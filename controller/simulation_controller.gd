@@ -16,12 +16,13 @@ func _process(delta: float) -> void:
 	for i in range(0, speed):
 		simulation.update()
 
-func spawn_celestial_body(title: String, pos: Vector3, vel: Vector3, mass: float, radius: float, color: Color):
+func spawn_celestial_body(title: String, pos: Vector3, vel: Vector3, mass: float, radius: float, luminance:float, color: Color):
 	var sim_body = CelestialBodySimulation.new(pos, vel, Vector3.ZERO, mass, radius)
-	simulation.celestial_bodies.append(sim_body)
 	var body = celestial_body_scene.instantiate() 
+	simulation.celestial_bodies.append(sim_body)
 	body.sim_body = sim_body
 	body.get_child(0).color = color
+	body.get_child(0).luminance = luminance
 	$"../CelestialBodies".add_child(body)
 	bodies.append(body)
 
@@ -37,7 +38,8 @@ func load_presets():
 		var vel = Vector3(float(elements[4]), float(elements[5]), float(elements[6]))
 		var mass = float(elements[7])
 		var radius = float(elements[8])
-		var color = Color.from_rgba8(int(elements[9]), int(elements[10]), int(elements[11]), int(elements[12]))
+		var luminance = float(elements[9])
+		var color = Color.from_rgba8(int(elements[10]), int(elements[11]), int(elements[12]), int(elements[13]))
 		
-		spawn_celestial_body(title, pos, vel, mass, radius, color)
+		spawn_celestial_body(title, pos, vel, mass, radius, luminance, color)
 	

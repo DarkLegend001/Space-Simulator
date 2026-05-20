@@ -35,9 +35,4 @@ script = ExtResource("2_c651c")
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=408548995]
 environment = SubResource("Environment_53q0u")
 
-[node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=1923814318]
-light_energy = 10.0
-light_size = 0.5
-omni_range = 1000.0
-
 [node name="CelestialBodies" type="Node" parent="." unique_id=1477786834]
