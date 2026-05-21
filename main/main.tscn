@@ -38,3 +38,5 @@ script = ExtResource("2_c651c")
 environment = SubResource("Environment_53q0u")
 
 [node name="CelestialBodies" type="Node" parent="." unique_id=1477786834]
+
+[node name="CelestialPaths" type="Node" parent="." unique_id=1402288860]
