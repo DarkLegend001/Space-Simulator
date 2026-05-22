@@ -1,7 +1,7 @@
 class_name CelestialPathRenderer extends Node3D
 
 var color: Color
-var radius := 2
+var radius := 0.05
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
