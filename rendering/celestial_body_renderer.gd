@@ -34,11 +34,8 @@ func set_light():
 	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta: float) -> void:
+func _process(delta: float) -> void:
 	position = sim_body.pos / Globals.distance_scale
 	rotation = sim_body.rot
 	if (following):
-		$"../../../SimulationController".move_camera(sim_body.vel)
-
-func set_following(following: bool):
-	self.following = following
+		$"../../../SimulationController".move_camera(sim_body.vel, delta)
