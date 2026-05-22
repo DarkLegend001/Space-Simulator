@@ -3,13 +3,15 @@ class_name SimulationController extends Node
 var main_simulation: Simulation
 var bodies: Array 
 var paths: Array
+
 # timesteps per second
 @export var speed := 1000
 # seconds of physics per timestep
 @export var timestep := 60
-# number of timesteps for prediction
+
+# number of timesteps for each prediction
 @export var prediction_length := 30
-# size of prediction timesteps 
+# seconds of physics per predicted timestep
 @export var prediction_timestep := 36000
 
 var elapsed_update_time := 0.0
@@ -35,14 +37,14 @@ func _process(delta: float) -> void:
 		main_simulation.update(timestep)
 		elapsed_update_time -= 1.0 / speed
 	var curves = get_curves()
-	for i in range(0, paths.size()):
+	for i in range(curves.size()):
 		paths[i].generate_mesh(curves[i])
 
-func spawn_celestial_body(title: String, pos: Vector3, vel: Vector3, mass: float, radius: float, luminance:float, color: Color):
+func spawn_celestial_body(_title, pos: Vector3, vel: Vector3, mass: float, radius: float, luminance:float, color: Color):
 	var sim_body = CelestialBodySimulation.new()
 	sim_body.init_vars(pos, vel, Vector3.ZERO, mass, radius)
 	main_simulation.celestial_bodies.append(sim_body)
-	var body = celestial_body_scene.instantiate() 
+	var body = celestial_body_scene.instantiate()
 	main_simulation.celestial_bodies.append(sim_body)
 	body.sim_body = sim_body
 	body.get_child(0).color = color
@@ -55,7 +57,7 @@ func spawn_celestial_path():
 	$"../CelestialPaths".add_child(path)
 	paths.append(path)
 
-func load_presets(): 
+func load_presets():
 	var file = FileAccess.open("res://data/presets.txt", FileAccess.READ)
 	var contents = file.get_as_text().trim_suffix("\n").split("\n")
 	for line in contents:
@@ -72,12 +74,14 @@ func load_presets():
 		
 		spawn_celestial_body(title, pos, vel, mass, radius, luminance, color)
 
-# This method relies on the order of bodies being consistent in all arrays
+# returns a 2d array of Vector3s
 func get_curves() -> Array:
-	var paths := Array()
-	var prediction_sim = main_simulation.duplicate(true)
-	for i in prediction_length:
+	var calc_paths = Array()
+	for i in range(bodies.size()):
+		calc_paths.append(PackedVector3Array())
+	var prediction_sim: Simulation = main_simulation.duplicate()
+	for i in range(prediction_length):
 		prediction_sim.update(prediction_timestep)
-		for j in prediction_sim.celestial_bodies.size():
-			paths[j].append(prediction_sim.celestial_bodies[j])
-	return paths
+		for j in range(bodies.size()):
+			calc_paths[j].append(prediction_sim.celestial_bodies[j].pos)
+	return calc_paths

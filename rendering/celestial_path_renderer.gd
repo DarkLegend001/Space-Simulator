@@ -9,6 +9,7 @@ func _ready() -> void:
 
 func generate_mesh(curve: Array):
 	var mesh = ImmediateMesh.new()
+	mesh.clear_surfaces()
 	var prev_point = null
 	for point in curve:
 		if prev_point == null:
@@ -17,6 +18,7 @@ func generate_mesh(curve: Array):
 			mesh.surface_add_vertex(Vector3(point.x + radius, point.y - radius, point.z))
 			mesh.surface_add_vertex(Vector3(point.x - radius, point.y + radius, point.z))
 			mesh.surface_add_vertex(Vector3(point.x - radius, point.y - radius, point.z))
+			mesh.surface_end()
 			prev_point = point
 			continue
 		mesh.surface_begin(Mesh.PRIMITIVE_TRIANGLE_STRIP)
@@ -56,5 +58,6 @@ func generate_mesh(curve: Array):
 	mesh.surface_add_vertex(Vector3(point.x - radius, point.y + radius, point.z))
 	mesh.surface_add_vertex(Vector3(point.x - radius, point.y - radius, point.z))
 	mesh.surface_end()
+	
 	
 	$Mesh.mesh = mesh

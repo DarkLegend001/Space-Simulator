@@ -30,3 +30,8 @@ func init_vars(pos: Vector3, vel: Vector3, rot_vel: Vector3, mass: float, radius
 	self.rot_vel = rot_vel
 	self.mass = mass
 	self.radius = radius
+
+func duplicate() -> CelestialBodySimulation:
+	var new_body = CelestialBodySimulation.new()
+	new_body.init_vars(pos, vel, rot_vel, mass, radius)
+	return new_body

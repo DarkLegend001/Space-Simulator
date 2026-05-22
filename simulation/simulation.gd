@@ -1,18 +1,24 @@
 class_name Simulation
-extends Resource
+
 # seconds
 var totalTime: int
 
 # All celestial bodies
 var celestial_bodies: Array
-var calculator: PhysicsCalculator
 
 
 func _init():
 	totalTime = 0
 	celestial_bodies = Array()
-	calculator = PhysicsCalculator.new()
+
+# deep duplicates another simulation's celestial bodies into a new simulation
+func duplicate() -> Simulation:
+	var new_sim = Simulation.new()
+	new_sim.celestial_bodies = Array()
+	for i in range(celestial_bodies.size()):
+		new_sim.celestial_bodies.append(celestial_bodies[i].duplicate())
+	return new_sim
 
 func update(timestep: float):
 	#print("Updating 'Simulation'")
-	calculator.integrate_forces(celestial_bodies, timestep)
+	PhysicsCalculator.integrate_forces(celestial_bodies, timestep)
