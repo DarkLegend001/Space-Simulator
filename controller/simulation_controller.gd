@@ -10,11 +10,11 @@ var paths: Array
 @export var timestep := 300
 
 # number of timesteps for each prediction
-@export var prediction_length := 250
+@export var prediction_length := 365
 # seconds of physics per predicted timestep
-@export var prediction_timestep := 100000
+@export var prediction_timestep := 86750
 # predictions per second
-@export var prediction_speed := 10
+@export var prediction_speed := 30
 
 var elapsed_update_time := 0.0
 var elapsed_prediction_time := 1.0 / prediction_speed
