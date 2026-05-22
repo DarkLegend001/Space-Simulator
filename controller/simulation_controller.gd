@@ -5,16 +5,19 @@ var bodies: Array
 var paths: Array
 
 # timesteps per second
-@export var speed := 100
+@export var speed := 500
 # seconds of physics per timestep
-@export var timestep := 60
+@export var timestep := 300
 
 # number of timesteps for each prediction
-@export var prediction_length := 50
+@export var prediction_length := 250
 # seconds of physics per predicted timestep
-@export var prediction_timestep := 302400
+@export var prediction_timestep := 100000
+# predictions per second
+@export var prediction_speed := 10
 
 var elapsed_update_time := 0.0
+var elapsed_prediction_time := 1.0 / prediction_speed
 
 var celestial_body_scene = preload("res://main/celestial_body.tscn")
 var celestial_path_scene = preload("res://rendering/celestial_path_renderer.tscn")
@@ -33,12 +36,17 @@ func move_camera(velocity: Vector3, delta: float):
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	elapsed_update_time += delta
+	elapsed_prediction_time += delta
+	
 	while elapsed_update_time > 1.0 / speed:
 		main_simulation.update(timestep)
 		elapsed_update_time -= 1.0 / speed
-	var curves = get_curves()
-	for i in range(curves.size()):
-		paths[i].generate_mesh(curves[i])
+	
+	if elapsed_prediction_time > 1.0 / prediction_speed:
+		elapsed_prediction_time = 0
+		var curves = get_curves()
+		for i in range(curves.size()):
+			paths[i].generate_mesh(curves[i])
 
 func spawn_celestial_body(_title, pos: Vector3, vel: Vector3, mass: float, radius: float, luminance:float, color: Color):
 	var sim_body = CelestialBodySimulation.new()
