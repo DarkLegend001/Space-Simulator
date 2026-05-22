@@ -1,7 +1,7 @@
 class_name CelestialPathRenderer extends Node3D
 
 var color: Color
-var radius := 1
+var radius := 2
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -11,6 +11,7 @@ func generate_mesh(curve: Array):
 	var mesh = ImmediateMesh.new()
 	var prev_point = null
 	for point in curve:
+		point /= Globals.distance_scale
 		if prev_point == null:
 			mesh.surface_begin(Mesh.PRIMITIVE_TRIANGLE_STRIP)
 			mesh.surface_add_vertex(Vector3(point.x + radius, point.y + radius, point.z))

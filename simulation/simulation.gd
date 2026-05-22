@@ -14,7 +14,6 @@ func _init():
 # deep duplicates another simulation's celestial bodies into a new simulation
 func duplicate() -> Simulation:
 	var new_sim = Simulation.new()
-	new_sim.celestial_bodies = Array()
 	for i in range(celestial_bodies.size()):
 		new_sim.celestial_bodies.append(celestial_bodies[i].duplicate())
 	return new_sim

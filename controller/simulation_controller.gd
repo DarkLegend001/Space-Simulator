@@ -10,9 +10,9 @@ var paths: Array
 @export var timestep := 60
 
 # number of timesteps for each prediction
-@export var prediction_length := 2
+@export var prediction_length := 30
 # seconds of physics per predicted timestep
-@export var prediction_timestep := 60
+@export var prediction_timestep := 600
 
 var elapsed_update_time := 0.0
 
@@ -26,9 +26,9 @@ func _ready() -> void:
 	for i in bodies.size():
 		spawn_celestial_path()
 
-# I have no idea why but this function needs to be multiplied by 2 to work properly, don't touch it
+# I figured out why this function needed to be multiplied by 2 to work properly, but not why it worked at all
 func move_camera(velocity: Vector3, delta: float):
-	$"../Camera3D".move(2 * velocity * speed * timestep * delta / Globals.distance_scale)
+	$"../Camera3D".move(velocity * speed * timestep * delta / Globals.distance_scale)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -42,10 +42,9 @@ func _process(delta: float) -> void:
 
 func spawn_celestial_body(_title, pos: Vector3, vel: Vector3, mass: float, radius: float, luminance:float, color: Color):
 	var sim_body = CelestialBodySimulation.new()
-	sim_body.init_vars(pos, vel, Vector3.ZERO, mass, radius)
-	main_simulation.celestial_bodies.append(sim_body)
 	var body = celestial_body_scene.instantiate()
 	main_simulation.celestial_bodies.append(sim_body)
+	sim_body.init_vars(pos, vel, Vector3.ZERO, mass, radius)
 	body.sim_body = sim_body
 	body.get_child(0).color = color
 	body.get_child(0).luminance = luminance
@@ -80,9 +79,11 @@ func get_curves() -> Array:
 	for i in range(bodies.size()):
 		calc_paths.append(PackedVector3Array())
 	var prediction_sim: Simulation = main_simulation.duplicate()
+	#print(prediction_sim.celestial_bodies.size())
+	#print("After return", prediction_sim.celestial_bodies[1].pos)
 	for i in range(prediction_length):
 		prediction_sim.update(prediction_timestep)
-		print(prediction_sim.celestial_bodies[1].pos)
+		#print(prediction_sim.celestial_bodies[1].pos)
 		for j in range(bodies.size()):
 			calc_paths[j].append(prediction_sim.celestial_bodies[j].pos)
 	return calc_paths
