@@ -3,12 +3,17 @@ class_name SimulationController extends Node
 var main_simulation: Simulation
 var bodies: Array 
 var paths: Array
-# timesteps per frame
-@export var speed := 50
+# timesteps per second
+@export var speed := 1000
+# seconds of physics per timestep
+@export var timestep := 60
 # number of timesteps for prediction
 @export var prediction_length := 30
 # size of prediction timesteps 
-@export var prediction_timestep_size := 3600
+@export var prediction_timestep := 36000
+
+var elapsed_update_time := 0.0
+
 var celestial_body_scene = preload("res://main/celestial_body.tscn")
 var celestial_path_scene = preload("res://rendering/celestial_path_renderer.tscn")
 
@@ -19,13 +24,16 @@ func _ready() -> void:
 	#for i in bodies.size():
 		#spawn_celestial_path()
 
-func move_camera(velocity: Vector3):
-	$"../Camera3D".move(velocity * speed * main_simulation.timestep / Globals.distance_scale)
+# I have no idea why but this function needs to be multiplied by 2 to work properly, don't touch it
+func move_camera(velocity: Vector3, delta: float):
+	$"../Camera3D".move(2 * velocity * speed * timestep * delta / Globals.distance_scale)
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	for i in range(0, speed):
-		main_simulation.update()
+	elapsed_update_time += delta
+	while elapsed_update_time > 1.0 / speed:
+		main_simulation.update(timestep)
+		elapsed_update_time -= 1.0 / speed
 
 func spawn_celestial_body(title: String, pos: Vector3, vel: Vector3, mass: float, radius: float, luminance:float, color: Color):
 	var sim_body = CelestialBodySimulation.new(pos, vel, Vector3.ZERO, mass, radius)
@@ -63,12 +71,11 @@ func load_presets():
 # This method relies on the order of bodies being consistent in all arrays
 func get_curves() -> Array:
 	var curves := Array()
-	var prediction_sim = main_simulation
-	prediction_sim.timestep = prediction_timestep_size
+	var prediction_sim = main_simulation.duplicate(true)
 	for body in bodies:
 		curves.append(Curve3D.new())
 	for i in prediction_length:
-		prediction_sim.update()
+		prediction_sim.update(prediction_timestep)
 		for j in prediction_sim.celestial_bodies.size():
 			curves[j].add_point(prediction_sim.celestial_bodies[j].pos)
 	return curves

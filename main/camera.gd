@@ -1,7 +1,7 @@
 extends Camera3D
 
 @export var precision := false
-@export var precision_mult := 0.005
+@export var precision_mult := 0.05
 @export var rot_sensitivity := 0.0025
 @export var pan_sensitivity := 0.1
 
@@ -28,7 +28,6 @@ func _input(event):
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	var change = delta * 1e5 / Globals.distance_scale
-	var precision_mult = 0.005
 	var speed = Vector3.ZERO
 	var rot_change = delta * 1
 	var rot_speed = Vector3.ZERO
