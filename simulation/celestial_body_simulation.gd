@@ -19,8 +19,10 @@ var radius: float
 # Mm/s^2
 var accel_old: Vector3
 
+func _init():
+	pass
 
-func _init(pos: Vector3, vel: Vector3, rot_vel: Vector3, mass: float, radius: float):
+func init_vars(pos: Vector3, vel: Vector3, rot_vel: Vector3, mass: float, radius: float):
 	self.pos = pos
 	self.vel = vel
 	self.accel = Vector3.ZERO
@@ -28,3 +30,9 @@ func _init(pos: Vector3, vel: Vector3, rot_vel: Vector3, mass: float, radius: fl
 	self.rot_vel = rot_vel
 	self.mass = mass
 	self.radius = radius
+
+func duplicate() -> CelestialBodySimulation:
+	var new_body = CelestialBodySimulation.new()
+	new_body.init_vars(pos, vel, rot_vel, mass, radius)
+	#print(new_body.pos)
+	return new_body
