@@ -10,9 +10,9 @@ var paths: Array
 @export var timestep := 60
 
 # number of timesteps for each prediction
-@export var prediction_length := 40
+@export var prediction_length := 50
 # seconds of physics per predicted timestep
-@export var prediction_timestep := 604800
+@export var prediction_timestep := 302400
 
 var elapsed_update_time := 0.0
 
@@ -79,11 +79,8 @@ func get_curves() -> Array:
 	for i in range(bodies.size()):
 		calc_paths.append(PackedVector3Array())
 	var prediction_sim: Simulation = main_simulation.duplicate()
-	#print(prediction_sim.celestial_bodies.size())
-	#print("After return", prediction_sim.celestial_bodies[1].pos)
 	for i in range(prediction_length):
-		prediction_sim.update(prediction_timestep)
-		#print(prediction_sim.celestial_bodies[1].pos)
 		for j in range(bodies.size()):
 			calc_paths[j].append(prediction_sim.celestial_bodies[j].pos)
+		prediction_sim.update(prediction_timestep)
 	return calc_paths
