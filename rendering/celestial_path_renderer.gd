@@ -40,17 +40,18 @@ func normalized_points(prev_point: Vector3, point: Vector3) -> Array:
 func generate_mesh(curve: Array):
 	var mesh = ImmediateMesh.new()
 	var prev_point = null
+	mesh.surface_begin(Mesh.PRIMITIVE_TRIANGLE_STRIP)
 	for point in curve:
 		point /= Globals.distance_scale
+		
 		if prev_point == null:
 			prev_point = point
 			continue
 		
-		mesh.surface_begin(Mesh.PRIMITIVE_TRIANGLE_STRIP)
 		for points in normalized_points(prev_point, point):
 			mesh.surface_add_vertex(points)
-		mesh.surface_end()
 		
 		prev_point = point
 	
+	mesh.surface_end()
 	$Mesh.mesh = mesh
