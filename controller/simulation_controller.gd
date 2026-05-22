@@ -16,23 +16,25 @@ var celestial_path_scene = preload("res://rendering/celestial_path_renderer.tscn
 func _ready() -> void:
 	main_simulation = Simulation.new()
 	load_presets()
-	for i in bodies.size():
-		spawn_celestial_path()
+	#for i in bodies.size():
+		#spawn_celestial_path()
 
+func move_camera(velocity: Vector3):
+	$"../Camera3D".move(velocity * speed * main_simulation.timestep / Globals.distance_scale)
+	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	for i in range(0, speed):
 		main_simulation.update()
-	var curves = get_curves()
-	for i in paths.size():
-		paths[i].set_curve(curves[i])
 
-func spawn_celestial_body(title: String, pos: Vector3, vel: Vector3, mass: float, radius: float, color: Color):
+func spawn_celestial_body(title: String, pos: Vector3, vel: Vector3, mass: float, radius: float, luminance:float, color: Color):
 	var sim_body = CelestialBodySimulation.new(pos, vel, Vector3.ZERO, mass, radius)
 	main_simulation.celestial_bodies.append(sim_body)
 	var body = celestial_body_scene.instantiate() 
+	main_simulation.celestial_bodies.append(sim_body)
 	body.sim_body = sim_body
 	body.get_child(0).color = color
+	body.get_child(0).luminance = luminance
 	$"../CelestialBodies".add_child(body)
 	bodies.append(body)
 
@@ -53,9 +55,10 @@ func load_presets():
 		var vel = Vector3(float(elements[4]), float(elements[5]), float(elements[6]))
 		var mass = float(elements[7])
 		var radius = float(elements[8])
-		var color = Color.from_rgba8(int(elements[9]), int(elements[10]), int(elements[11]), int(elements[12]))
+		var luminance = float(elements[9])
+		var color = Color.from_rgba8(int(elements[10]), int(elements[11]), int(elements[12]), int(elements[13]))
 		
-		spawn_celestial_body(title, pos, vel, mass, radius, color)
+		spawn_celestial_body(title, pos, vel, mass, radius, luminance, color)
 
 # This method relies on the order of bodies being consistent in all arrays
 func get_curves() -> Array:

@@ -1,5 +1,7 @@
 extends Camera3D
 
+@export var precision := false
+@export var precision_mult := 0.005
 @export var rot_sensitivity := 0.0025
 @export var pan_sensitivity := 0.1
 
@@ -25,7 +27,8 @@ func _input(event):
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	var change = delta * 50
+	var change = delta * 1e5 / Globals.distance_scale
+	var precision_mult = 0.005
 	var speed = Vector3.ZERO
 	var rot_change = delta * 1
 	var rot_speed = Vector3.ZERO
@@ -41,7 +44,7 @@ func _process(delta: float) -> void:
 		speed.z -= change
 	if Input.is_action_pressed("camera_back"):
 		speed.z += change
-	"""
+  
 	if Input.is_action_pressed("camera_rotate_right"):
 		rot_speed.x -= rot_change
 	if Input.is_action_pressed("camera_rotate_left"):
@@ -54,10 +57,14 @@ func _process(delta: float) -> void:
 		rot_speed.z += rot_change
 	if Input.is_action_pressed("camera_roll_left"):
 		rot_speed.z -= rot_change
-	"""
-	position += (transform.basis * speed)
-	"""
+	
+	if (Input.is_action_just_pressed("toggle_camera_precision")):
+		precision = !precision
+	
+	if (precision):
+		speed *= precision_mult
+	
+	move(transform.basis * speed)
 	rotate_object_local(Vector3.UP, rot_speed.x)
 	rotate_object_local(Vector3.RIGHT, rot_speed.y)
 	rotate_object_local(Vector3.FORWARD, rot_speed.z)
-	"""
