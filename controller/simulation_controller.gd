@@ -24,9 +24,9 @@ func _ready() -> void:
 	#for i in bodies.size():
 		#spawn_celestial_path()
 
+# I have no idea why but this function needs to be multiplied by 2 to work properly, don't touch it
 func move_camera(velocity: Vector3, delta: float):
 	$"../Camera3D".move(2 * velocity * speed * timestep * delta / Globals.distance_scale)
-	print(delta)
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
