@@ -1,7 +1,7 @@
 class_name CelestialPathRenderer extends Node3D
 
 @export var color: Color
-@export var radius := 0.02
+@export var radius := 1e-3
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -9,10 +9,11 @@ func _ready() -> void:
 
 func normalized_points(prev_point: Vector3, point: Vector3) -> Array:
 	var points := Array()
+	var camera_distance = point.distance_to($"../../Camera3D".position)
 	var normal := (point - prev_point).normalized()
-	var right = normal.cross(Vector3.UP) * radius
+	var right = normal.cross(Vector3.UP) * (radius * camera_distance)
 	var left = -right
-	var up = normal.cross(point.normalized()) * radius
+	var up = normal.cross(point.normalized()) * (radius * camera_distance)
 	var down = -up
 	
 	points.append(point + up + left)
