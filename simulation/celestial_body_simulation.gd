@@ -15,6 +15,10 @@ var mass: float
 # Mm
 var radius: float
 
+# List of previous locations
+var previous_locations: Array
+
+
 # Only used in the calculations for other attributes
 # Mm/s^2
 var accel_old: Vector3

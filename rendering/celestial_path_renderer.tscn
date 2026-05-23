@@ -5,7 +5,7 @@
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ew3ee"]
 cull_mode = 2
 shading_mode = 0
-albedo_color = Color(0.5882353, 0.78431374, 0.8627451, 1)
+albedo_color = Color(0.91633344, 0.67149436, 0.73183244, 1)
 
 [sub_resource type="ImmediateMesh" id="ImmediateMesh_vrn0k"]
 

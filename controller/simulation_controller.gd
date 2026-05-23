@@ -10,11 +10,11 @@ var paths: Array
 @export var timestep := 300
 
 # number of timesteps for each prediction
-@export var prediction_length := 365
+@export var prediction_length := 50
 # seconds of physics per predicted timestep
-@export var prediction_timestep := 86750
+@export var prediction_timestep := 360000
 # predictions per second
-@export var prediction_speed := 30
+@export var prediction_speed := 10
 
 var elapsed_update_time := 0.0
 var elapsed_prediction_time := 1.0 / prediction_speed
@@ -62,6 +62,8 @@ func spawn_celestial_body(_title, pos: Vector3, vel: Vector3, mass: float, radiu
 func spawn_celestial_path():
 	var path = celestial_path_scene.instantiate()
 	$"../CelestialPaths".add_child(path)
+	path.test_color = Color.SKY_BLUE
+	path.get_child(0).material_override = path.get_child(0).material_override.duplicate()
 	paths.append(path)
 
 func load_presets():
