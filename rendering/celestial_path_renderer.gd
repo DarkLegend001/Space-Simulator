@@ -1,6 +1,6 @@
 class_name CelestialPathRenderer extends Node3D
 
-@export var color: Color
+@export var test_color: Color
 @export var radius := 1e-3
 
 # Called when the node enters the scene tree for the first time.
@@ -40,6 +40,7 @@ func normalized_points(prev_point: Vector3, point: Vector3) -> Array:
 
 func generate_mesh(curve: Array):
 	var mesh = ImmediateMesh.new()
+	
 	var prev_point = null
 	mesh.surface_begin(Mesh.PRIMITIVE_TRIANGLE_STRIP)
 	for point in curve:
@@ -56,3 +57,4 @@ func generate_mesh(curve: Array):
 	
 	mesh.surface_end()
 	$Mesh.mesh = mesh
+	$Mesh.material_override.albedo_color = test_color
