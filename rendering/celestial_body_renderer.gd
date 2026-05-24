@@ -17,8 +17,8 @@ func _ready() -> void:
 	set_light()
 
 func set_material():
-	$Mesh.material_overlay = load("res://assets/default_body.tres").duplicate()
-	$Mesh.material_overlay.albedo_color = color
+	$Mesh.mesh.material = load("res://assets/default_body.tres").duplicate()
+	$Mesh.mesh.material.albedo_color = color
 
 func set_light():
 	if $Light != null:
@@ -29,7 +29,7 @@ func set_light():
 			$Light.light_size = sim_body.radius / Globals.size_scale
 			$Light.omni_range = 2e5 / Globals.distance_scale
 			$Mesh.cast_shadow = false
-			$Mesh.material_overlay.shading_mode = 0
+			$Mesh.mesh.material.shading_mode = 0
 			print("making light")
 	
 

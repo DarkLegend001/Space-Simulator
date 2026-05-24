@@ -1,6 +1,6 @@
 [gd_resource type="StandardMaterial3D" format=3 uid="uid://cyu5tvpyok6y6"]
 
 [resource]
+resource_local_to_scene = true
 cull_mode = 2
-albedo_color = Color(0.67058825, 1, 1, 1)
 texture_repeat = false
