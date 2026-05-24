@@ -4,7 +4,6 @@
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l5vr7"]
 resource_local_to_scene = true
-cull_mode = 2
 texture_repeat = false
 
 [sub_resource type="SphereMesh" id="SphereMesh_l5vr7"]
@@ -22,6 +21,5 @@ gi_lightmap_texel_scale = 16.0
 mesh = SubResource("SphereMesh_l5vr7")
 
 [node name="Light" type="OmniLight3D" parent="." unique_id=918232526]
-shadow_enabled = true
 shadow_bias = 0.5
 omni_range = 100.0

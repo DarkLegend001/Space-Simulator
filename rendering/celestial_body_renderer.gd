@@ -10,9 +10,6 @@ var sim_body: CelestialBodySimulation
 func _ready() -> void:
 	print("Instantiating CelestialBodyRenderer")
 	sim_body = get_parent().sim_body
-	scale = Vector3.ONE * (sim_body.radius / Globals.size_scale)
-	
-	scale = Vector3.ONE * (sim_body.radius / Globals.size_scale)
 	set_light()
 
 func set_light():
@@ -33,5 +30,6 @@ func _process(delta: float) -> void:
 	position = sim_body.pos / Globals.distance_scale
 	rotation = sim_body.rot
 	$Mesh.mesh.material.albedo_color = color
+	$Mesh.scale = Vector3.ONE * ((1 - Globals.planet_scaling) * (sim_body.radius / Globals.size_scale) + (Globals.planet_scaling) * (200 * sqrt(sim_body.radius) * position.distance_to($"../../../Camera3D".position) / (Globals.size_scale)))
 	if (following):
 		$"../../../SimulationController".move_camera(sim_body.vel, delta)
