@@ -13,12 +13,7 @@ func _ready() -> void:
 	scale = Vector3.ONE * (sim_body.radius / Globals.size_scale)
 	
 	scale = Vector3.ONE * (sim_body.radius / Globals.size_scale)
-	set_material()
 	set_light()
-
-func set_material():
-	$Mesh.mesh.material = load("res://assets/default_body.tres").duplicate()
-	$Mesh.mesh.material.albedo_color = color
 
 func set_light():
 	if $Light != null:
@@ -37,5 +32,6 @@ func set_light():
 func _process(delta: float) -> void:
 	position = sim_body.pos / Globals.distance_scale
 	rotation = sim_body.rot
+	$Mesh.mesh.material.albedo_color = color
 	if (following):
 		$"../../../SimulationController".move_camera(sim_body.vel, delta)
