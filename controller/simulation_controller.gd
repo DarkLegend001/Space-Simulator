@@ -62,8 +62,7 @@ func spawn_celestial_body(_title, pos: Vector3, vel: Vector3, mass: float, radiu
 func spawn_celestial_path():
 	var path = celestial_path_scene.instantiate()
 	$"../CelestialPaths".add_child(path)
-	path.test_color = Color.SKY_BLUE
-	path.get_child(0).material_override = path.get_child(0).material_override.duplicate()
+	path.color = Color.SKY_BLUE
 	paths.append(path)
 
 func load_presets():
