@@ -4,6 +4,7 @@
 [ext_resource type="Material" uid="uid://cyu5tvpyok6y6" path="res://assets/default_body.tres" id="2_5q51l"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_l5vr7"]
+resource_local_to_scene = true
 material = ExtResource("2_5q51l")
 
 [node name="CelestialBodyRenderer" type="Node3D" unique_id=1844500272]
