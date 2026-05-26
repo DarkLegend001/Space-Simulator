@@ -35,6 +35,10 @@ func move_camera(velocity: Vector3, delta: float):
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	pass
+
+			
+func _physics_process(delta: float) -> void:
 	elapsed_update_time += delta
 	elapsed_prediction_time += delta
 	
@@ -47,7 +51,7 @@ func _process(delta: float) -> void:
 		var curves = get_curves()
 		for i in range(curves.size()):
 			paths[i].generate_mesh(curves[i])
-
+			
 func spawn_celestial_body(_title, pos: Vector3, vel: Vector3, mass: float, radius: float, luminance:float, color: Color):
 	var sim_body = CelestialBodySimulation.new()
 	var body = celestial_body_scene.instantiate()
