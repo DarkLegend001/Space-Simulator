@@ -59,7 +59,7 @@ func _physics_process(delta: float) -> void:
 		elapsed_store_time = 0
 		for body in main_simulation.celestial_bodies:
 			body.previous_locations.insert(0, body.pos)
-			body.previous_locations = body.previous_locations.slice(0, body.previous_locations.size() - 1)
+			body.previous_locations.remove_at(num_prev_positions)
 	
 	if elapsed_prediction_time > 1.0 / prediction_speed:
 		elapsed_prediction_time = 0
