@@ -5,20 +5,20 @@ var prediction_paths: Array
 var previous_paths: Array
 
 # timesteps per second
-@export var speed := 500
+@export var speed := 450
 # seconds of physics per timestep
 @export var timestep := 300
 
 # number of timesteps for each prediction
-@export var prediction_length := 450
+@export var prediction_length := 500
 # seconds of physics per predicted timestep
 @export var prediction_timestep := 36000
 # predictions per second
-@export var prediction_speed := 5
+@export var prediction_speed := 30
 # number of previous positions stored
 @export var num_prev_positions := 300
 # number of times previous positions are stored per second
-@export var store_speed := 5
+@export var store_speed := 10
 
 
 var elapsed_update_time := 0.0
@@ -44,27 +44,31 @@ func move_camera(velocity: Vector3, delta: float):
 func _process(delta: float) -> void:
 	elapsed_prediction_time += delta
 	elapsed_store_time += delta
+	var follow_body = null
+	for body in $"../CelestialBodies".get_children():
+		if body.get_child(0).following == true:
+			follow_body = body.sim_body
+			break
 	if elapsed_store_time > 1.0 / store_speed:
 		elapsed_store_time = 0
 		for body in main_simulation.celestial_bodies:
 			body.previous_locations.insert(0, body.pos)
 			body.previous_locations.remove_at(num_prev_positions)
-		for i in range(prediction_paths.size()):
-			previous_paths[i].generate_mesh(main_simulation.celestial_bodies[i].previous_locations)
-	var follow_body = null
-	for body in $"../CelestialBodies".get_children():
-		if body.get_child(0).following == true:
-			print("following ", body.sim_body.name)
-			follow_body = body.sim_body
-			break
+		if follow_body == null:
+			for i in range(prediction_paths.size()):
+				previous_paths[i].generate_mesh(main_simulation.celestial_bodies[i].previous_locations)
+		else:
+			for i in range(prediction_paths.size()):
+				var new_path = main_simulation.celestial_bodies[i].previous_locations.duplicate()
+				for j in range(new_path.size()):
+					new_path[j] -= follow_body.previous_locations[j] - follow_body.previous_locations[0]
+				previous_paths[i].generate_mesh(new_path)
 	if elapsed_prediction_time > 1.0 / prediction_speed:
 		elapsed_prediction_time = 0
 		var curves: Array
 		if follow_body == null:
 			curves = get_predicted_curves()
 		else:
-			print("predicting relative to ", follow_body.name)
-			print("pos of ", follow_body.pos)
 			curves = get_relative_predicted_curves(follow_body)
 		for i in range(curves.size()):
 			prediction_paths[i].generate_mesh(curves[i])

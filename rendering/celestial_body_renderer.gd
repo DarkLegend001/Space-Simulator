@@ -19,7 +19,7 @@ func set_light():
 		else:
 			$Light.light_energy = luminance
 			$Light.light_size = sim_body.radius / Globals.size_scale
-			$Light.omni_range = 2e5 / Globals.distance_scale
+			$Light.omni_range = 1e6 / Globals.distance_scale
 			$Mesh.cast_shadow = false
 			$Mesh.mesh.material.shading_mode = 0
 			print("making light")
