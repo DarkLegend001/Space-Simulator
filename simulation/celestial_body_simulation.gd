@@ -14,10 +14,11 @@ var rot_vel: Vector3
 var mass: float
 # Mm
 var radius: float
+# Name of planet
+var name: String
 
 # List of previous locations
 var previous_locations: Array
-
 
 # Only used in the calculations for other attributes
 # Mm/s^2
@@ -26,7 +27,8 @@ var accel_old: Vector3
 func _init():
 	pass
 
-func init_vars(pos: Vector3, vel: Vector3, rot_vel: Vector3, mass: float, radius: float):
+func init_vars(name: String, pos: Vector3, vel: Vector3, rot_vel: Vector3, mass: float, radius: float):
+	self.name = name
 	self.pos = pos
 	self.vel = vel
 	self.accel = Vector3.ZERO
@@ -38,5 +40,5 @@ func init_vars(pos: Vector3, vel: Vector3, rot_vel: Vector3, mass: float, radius
 
 func duplicate() -> CelestialBodySimulation:
 	var new_body = CelestialBodySimulation.new()
-	new_body.init_vars(pos, vel, rot_vel, mass, radius)
+	new_body.init_vars(name, pos, vel, rot_vel, mass, radius)
 	return new_body
