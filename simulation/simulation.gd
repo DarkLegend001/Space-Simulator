@@ -21,3 +21,8 @@ func duplicate() -> Simulation:
 func update(timestep: float):
 	#print("Updating 'Simulation'")
 	PhysicsCalculator.integrate_forces(celestial_bodies, timestep)
+	for body in celestial_bodies:
+		body.previous_locations.insert(0, body.pos)
+		body.previous_locations = body.previous_locations.slice(0, body.previous_locations.size() - 1)
+		
+		

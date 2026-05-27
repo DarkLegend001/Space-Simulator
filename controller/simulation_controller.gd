@@ -15,6 +15,9 @@ var paths: Array
 @export var prediction_timestep := 360000
 # predictions per second
 @export var prediction_speed := 10
+# number of previous positions sted
+@export var num_prev_positions := 15000
+
 
 var elapsed_update_time := 0.0
 var elapsed_prediction_time := 1.0 / prediction_speed
@@ -26,6 +29,9 @@ var celestial_path_scene = preload("res://rendering/celestial_path_renderer.tscn
 func _ready() -> void:
 	main_simulation = Simulation.new()
 	load_presets()
+	for body in main_simulation.celestial_bodies:
+		body.previous_locations.resize(num_prev_positions)
+		body.previous_locations.fill(body.pos)
 	for i in bodies.size():
 		spawn_celestial_path()
 
