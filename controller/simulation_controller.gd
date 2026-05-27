@@ -1,7 +1,6 @@
 class_name SimulationController extends Node
 
 var main_simulation: Simulation
-var bodies: Array 
 var prediction_paths: Array
 var previous_paths: Array
 
@@ -17,7 +16,7 @@ var previous_paths: Array
 # predictions per second
 @export var prediction_speed := 5
 # number of previous positions stored
-@export var num_prev_positions := 500
+@export var num_prev_positions := 300
 # number of times previous positions are stored per second
 @export var store_speed := 5
 
@@ -33,7 +32,7 @@ var celestial_path_scene = preload("res://rendering/celestial_path_renderer.tscn
 func _ready() -> void:
 	main_simulation = Simulation.new()
 	load_presets()
-	for i in bodies.size():
+	for i in main_simulation.celestial_bodies.size():
 		spawn_prediction_celestial_path()
 		spawn_previous_celestial_path()
 
@@ -52,9 +51,21 @@ func _process(delta: float) -> void:
 			body.previous_locations.remove_at(num_prev_positions)
 		for i in range(prediction_paths.size()):
 			previous_paths[i].generate_mesh(main_simulation.celestial_bodies[i].previous_locations)
+	var follow_body = null
+	for body in $"../CelestialBodies".get_children():
+		if body.get_child(0).following == true:
+			print("following ", body.sim_body.name)
+			follow_body = body.sim_body
+			break
 	if elapsed_prediction_time > 1.0 / prediction_speed:
 		elapsed_prediction_time = 0
-		var curves = get_predicted_curves()
+		var curves: Array
+		if follow_body == null:
+			curves = get_predicted_curves()
+		else:
+			print("predicting relative to ", follow_body.name)
+			print("pos of ", follow_body.pos)
+			curves = get_relative_predicted_curves(follow_body)
 		for i in range(curves.size()):
 			prediction_paths[i].generate_mesh(curves[i])
 
@@ -65,18 +76,17 @@ func _physics_process(delta: float) -> void:
 		main_simulation.update(timestep)
 		elapsed_update_time -= 1.0 / speed
 
-func spawn_celestial_body(_title, pos: Vector3, vel: Vector3, mass: float, radius: float, luminance:float, color: Color):
+func spawn_celestial_body(name: String, pos: Vector3, vel: Vector3, mass: float, radius: float, luminance:float, color: Color):
 	var sim_body = CelestialBodySimulation.new()
 	var body = celestial_body_scene.instantiate()
 	main_simulation.celestial_bodies.append(sim_body)
-	sim_body.init_vars(pos, vel, Vector3.ZERO, mass, radius)
+	sim_body.init_vars(name, pos, vel, Vector3.ZERO, mass, radius)
 	sim_body.previous_locations.resize(num_prev_positions)
 	sim_body.previous_locations.fill(pos)
 	body.sim_body = sim_body
 	body.get_child(0).color = color
 	body.get_child(0).luminance = luminance
 	$"../CelestialBodies".add_child(body)
-	bodies.append(body)
 
 func spawn_prediction_celestial_path():
 	var path = celestial_path_scene.instantiate()
@@ -110,11 +120,28 @@ func load_presets():
 # returns a 2d array of Vector3s
 func get_predicted_curves() -> Array:
 	var calc_paths = Array()
-	for i in range(bodies.size()):
+	for i in range(main_simulation.celestial_bodies.size()):
 		calc_paths.append(PackedVector3Array())
 	var prediction_sim: Simulation = main_simulation.duplicate()
 	for i in range(prediction_length):
-		for j in range(bodies.size()):
+		for j in range(main_simulation.celestial_bodies.size()):
 			calc_paths[j].append(prediction_sim.celestial_bodies[j].pos)
+		prediction_sim.update(prediction_timestep)
+	return calc_paths
+
+func get_relative_predicted_curves(body: CelestialBodySimulation) -> Array:
+	var calc_paths = Array()
+	for i in range(main_simulation.celestial_bodies.size()):
+		calc_paths.append(PackedVector3Array())
+	var prediction_sim: Simulation = main_simulation.duplicate()
+	var relative_body: CelestialBodySimulation
+	for prediction_body in prediction_sim.celestial_bodies:
+		if prediction_body.name == body.name:
+			relative_body = prediction_body
+			break
+	var initial_relative_body_pos = relative_body.pos
+	for i in range(prediction_length):
+		for j in range(prediction_sim.celestial_bodies.size()):
+			calc_paths[j].append(prediction_sim.celestial_bodies[j].pos - (relative_body.pos - initial_relative_body_pos))
 		prediction_sim.update(prediction_timestep)
 	return calc_paths
