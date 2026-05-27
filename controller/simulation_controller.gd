@@ -15,8 +15,12 @@ var paths: Array
 @export var prediction_timestep := 360000
 # predictions per second
 @export var prediction_speed := 10
-# number of previous positions sted
-@export var num_prev_positions := 15000
+# number of previous positions stored
+@export var num_prev_positions := 1500
+# number of updates per previous position stored
+@export var processes_between_position_stored := 10
+# number of processes since last position stored
+var processes_since_pos_stored:= 0
 
 
 var elapsed_update_time := 0.0
@@ -47,16 +51,24 @@ func _process(delta: float) -> void:
 func _physics_process(delta: float) -> void:
 	elapsed_update_time += delta
 	elapsed_prediction_time += delta
+	processes_since_pos_stored += 1
 	
 	while elapsed_update_time > 1.0 / speed:
 		main_simulation.update(timestep)
 		elapsed_update_time -= 1.0 / speed
+	
+	if processes_since_pos_stored == processes_between_position_stored:
+		processes_since_pos_stored = 0
+		for body in main_simulation.celestial_bodies:
+			body.previous_locations.insert(0, body.pos)
+			body.previous_locations = body.previous_locations.slice(0, body.previous_locations.size() - 1)
 	
 	if elapsed_prediction_time > 1.0 / prediction_speed:
 		elapsed_prediction_time = 0
 		var curves = get_curves()
 		for i in range(curves.size()):
 			paths[i].generate_mesh(curves[i])
+		
 			
 func spawn_celestial_body(_title, pos: Vector3, vel: Vector3, mass: float, radius: float, luminance:float, color: Color):
 	var sim_body = CelestialBodySimulation.new()
