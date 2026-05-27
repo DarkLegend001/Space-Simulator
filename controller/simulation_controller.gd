@@ -17,14 +17,12 @@ var paths: Array
 @export var prediction_speed := 10
 # number of previous positions stored
 @export var num_prev_positions := 1500
-# number of updates per previous position stored
-@export var processes_between_position_stored := 10
-# number of processes since last position stored
-var processes_since_pos_stored:= 0
+@export var store_speed := 10
 
 
 var elapsed_update_time := 0.0
 var elapsed_prediction_time := 1.0 / prediction_speed
+var elapsed_store_time := 1.0 / prediction_speed
 
 var celestial_body_scene = preload("res://main/celestial_body.tscn")
 var celestial_path_scene = preload("res://rendering/celestial_path_renderer.tscn")
@@ -51,14 +49,14 @@ func _process(delta: float) -> void:
 func _physics_process(delta: float) -> void:
 	elapsed_update_time += delta
 	elapsed_prediction_time += delta
-	processes_since_pos_stored += 1
+	elapsed_store_time += delta
 	
 	while elapsed_update_time > 1.0 / speed:
 		main_simulation.update(timestep)
 		elapsed_update_time -= 1.0 / speed
 	
-	if processes_since_pos_stored == processes_between_position_stored:
-		processes_since_pos_stored = 0
+	if elapsed_store_time > 1.0 / store_speed:
+		elapsed_store_time = 0
 		for body in main_simulation.celestial_bodies:
 			body.previous_locations.insert(0, body.pos)
 			body.previous_locations = body.previous_locations.slice(0, body.previous_locations.size() - 1)
