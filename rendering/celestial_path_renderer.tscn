@@ -3,14 +3,15 @@
 [ext_resource type="Script" uid="uid://curgh8snrobmj" path="res://rendering/celestial_path_renderer.gd" id="1_ew3ee"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ew3ee"]
+resource_local_to_scene = true
 cull_mode = 2
 shading_mode = 0
-albedo_color = Color(0.91633344, 0.67149436, 0.73183244, 1)
 
 [sub_resource type="ImmediateMesh" id="ImmediateMesh_vrn0k"]
 
 [node name="CurveRenderer" type="Node3D" unique_id=420173815]
 script = ExtResource("1_ew3ee")
+color = Color(1, 1, 1, 1)
 
 [node name="Mesh" type="MeshInstance3D" parent="." unique_id=1941979052]
 material_override = SubResource("StandardMaterial3D_ew3ee")

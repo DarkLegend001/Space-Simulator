@@ -4,5 +4,6 @@ extends Node
 @export var distance_scale: int = 1e3
 @export var size_scale: int = 1e7
 # Value from 0 to 1 that defines how much the planets scale with distance from the camera
-# 1 means planets always appear the same size, 0 means planets have realistic sizes with no scaling. Values less than 
-@export var planet_scaling: float = 1
+# 1 means planets always appear the same size, 0 means planets have realistic sizes with no scaling. 
+# Values close to 1 can lead to planets becoming invisible when they are too close to the camera 
+@export var planet_scaling: float = 0.5
