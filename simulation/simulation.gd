@@ -20,4 +20,4 @@ func duplicate() -> Simulation:
 
 func update(timestep: float):
 	#print("Updating 'Simulation'")
-	PhysicsCalculator.integrate_forces(celestial_bodies, timestep)
+	PhysicsCalculator.integrate_forces_body(celestial_bodies, timestep)

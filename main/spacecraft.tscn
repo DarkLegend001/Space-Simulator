@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://c635rpus26ywx"]
+
+[ext_resource type="Script" uid="uid://bnpemdqhbv6m" path="res://main/spacecraft.gd" id="1_ul1m1"]
+[ext_resource type="PackedScene" uid="uid://uby1osxd5byv" path="res://rendering/spacecraft_renderer.tscn" id="2_pyxig"]
+
+[node name="Spacecraft" type="Node" unique_id=1929835342]
+script = ExtResource("1_ul1m1")
+
+[node name="SpacecraftRenderer" parent="." unique_id=218654572 instance=ExtResource("2_pyxig")]

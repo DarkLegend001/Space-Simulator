@@ -59,7 +59,7 @@ func _process(delta: float) -> void:
 				previous_paths[i].generate_mesh(main_simulation.celestial_bodies[i].previous_locations)
 		else:
 			for i in range(prediction_paths.size()):
-				var new_path = main_simulation.celestial_bodies[i].previous_locations.duplicate()
+				var new_path = main_simulation.celestial_bodies[i].pzrevious_locations.duplicate()
 				for j in range(new_path.size()):
 					new_path[j] -= follow_body.previous_locations[j] - follow_body.previous_locations[0]
 				previous_paths[i].generate_mesh(new_path)

@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://uby1osxd5byv"]
+
+[ext_resource type="Script" uid="uid://resgdx432ort" path="res://rendering/spacecraft_renderer.gd" id="1_k3o02"]
+
+[node name="SpacecraftRenderer" type="Node3D" unique_id=218654572]
+script = ExtResource("1_k3o02")
