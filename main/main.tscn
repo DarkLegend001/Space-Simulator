@@ -39,3 +39,19 @@ environment = SubResource("Environment_53q0u")
 [node name="CelestialBodies" type="Node" parent="." unique_id=1477786834]
 
 [node name="CelestialPaths" type="Node" parent="." unique_id=1402288860]
+
+[node name="GUI" type="Control" parent="." unique_id=303294077]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="CheckBox" type="CheckBox" parent="GUI" unique_id=357538395]
+clip_contents = true
+layout_mode = 0
+offset_right = 24.0
+offset_bottom = 24.0
+action_mode = 0
+text = "Following"
+alignment = 2
+icon_alignment = 2
