@@ -27,11 +27,11 @@ func _unhandled_input(event):
 		if event.button_index == MOUSE_BUTTON_WHEEL_UP:
 			speed.x += mouse_pos.x * zoom_side_sensitivity
 			speed.y -= mouse_pos.y * zoom_side_sensitivity
-			speed.z -= zoom_sensitivity * (2.0 ** (event.factor if event.factor else 1.0))
+			speed.z -= zoom_sensitivity
 		elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
 			speed.x -= mouse_pos.x * zoom_side_sensitivity
 			speed.y += mouse_pos.y * zoom_side_sensitivity
-			speed.z += zoom_sensitivity * (2.0 ** (event.factor if event.factor else 1.0))
+			speed.z += zoom_sensitivity
 		move(transform.basis * speed)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -41,7 +41,7 @@ func _process(delta: float) -> void:
 	var rot_change = delta * 1
 	var rot_speed = Vector3.ZERO
 	
-	zoom_side_sensitivity = 2.85 * zoom_sensitivity / get_viewport().get_visible_rect().size.x
+	zoom_side_sensitivity = 2.775 * zoom_sensitivity / get_viewport().get_visible_rect().size.x
 	
 	if Input.is_action_pressed("camera_right"):
 		speed.x += change
