@@ -1,6 +1,10 @@
 class_name SimulationController extends Node
 
 var main_simulation: Simulation
+<<<<<<< Updated upstream
+=======
+var bodies: Array 
+>>>>>>> Stashed changes
 var prediction_paths: Array
 var previous_paths: Array
 
@@ -10,6 +14,7 @@ var previous_paths: Array
 @export var timestep := 300
 
 # number of timesteps for each prediction
+<<<<<<< Updated upstream
 @export var prediction_length := 500
 # seconds of physics per predicted timestep
 @export var prediction_timestep := 36000
@@ -19,6 +24,17 @@ var previous_paths: Array
 @export var num_prev_positions := 300
 # number of times previous positions are stored per second
 @export var store_speed := 10
+=======
+@export var prediction_length := 450
+# seconds of physics per predicted timestep
+@export var prediction_timestep := 36000
+# predictions per second
+@export var prediction_speed := 5
+# number of previous positions stored
+@export var num_prev_positions := 500
+# number of times previous positions are stored per second
+@export var store_speed := 5
+>>>>>>> Stashed changes
 
 
 var elapsed_update_time := 0.0
@@ -32,7 +48,11 @@ var celestial_path_scene = preload("res://rendering/celestial_path_renderer.tscn
 func _ready() -> void:
 	main_simulation = Simulation.new()
 	load_presets()
+<<<<<<< Updated upstream
 	for i in main_simulation.celestial_bodies.size():
+=======
+	for i in bodies.size():
+>>>>>>> Stashed changes
 		spawn_prediction_celestial_path()
 		spawn_previous_celestial_path()
 
@@ -44,16 +64,20 @@ func move_camera(velocity: Vector3, delta: float):
 func _process(delta: float) -> void:
 	elapsed_prediction_time += delta
 	elapsed_store_time += delta
+<<<<<<< Updated upstream
 	var follow_body = null
 	for body in $"../CelestialBodies".get_children():
 		if body.get_child(0).following == true:
 			follow_body = body.sim_body
 			break
+=======
+>>>>>>> Stashed changes
 	if elapsed_store_time > 1.0 / store_speed:
 		elapsed_store_time = 0
 		for body in main_simulation.celestial_bodies:
 			body.previous_locations.insert(0, body.pos)
 			body.previous_locations.remove_at(num_prev_positions)
+<<<<<<< Updated upstream
 		if follow_body == null:
 			for i in range(prediction_paths.size()):
 				previous_paths[i].generate_mesh(main_simulation.celestial_bodies[i].previous_locations)
@@ -70,6 +94,13 @@ func _process(delta: float) -> void:
 			curves = get_predicted_curves()
 		else:
 			curves = get_relative_predicted_curves(follow_body)
+=======
+		for i in range(prediction_paths.size()):
+			previous_paths[i].generate_mesh(main_simulation.celestial_bodies[i].previous_locations)
+	if elapsed_prediction_time > 1.0 / prediction_speed:
+		elapsed_prediction_time = 0
+		var curves = get_predicted_curves()
+>>>>>>> Stashed changes
 		for i in range(curves.size()):
 			prediction_paths[i].generate_mesh(curves[i])
 
@@ -80,11 +111,19 @@ func _physics_process(delta: float) -> void:
 		main_simulation.update(timestep)
 		elapsed_update_time -= 1.0 / speed
 
+<<<<<<< Updated upstream
 func spawn_celestial_body(name: String, pos: Vector3, vel: Vector3, mass: float, radius: float, luminance:float, color: Color):
 	var sim_body = CelestialBodySimulation.new()
 	var body = celestial_body_scene.instantiate()
 	main_simulation.celestial_bodies.append(sim_body)
 	sim_body.init_vars(name, pos, vel, Vector3.ZERO, mass, radius)
+=======
+func spawn_celestial_body(_title, pos: Vector3, vel: Vector3, mass: float, radius: float, luminance:float, color: Color):
+	var sim_body = CelestialBodySimulation.new()
+	var body = celestial_body_scene.instantiate()
+	main_simulation.celestial_bodies.append(sim_body)
+	sim_body.init_vars(pos, vel, Vector3.ZERO, mass, radius)
+>>>>>>> Stashed changes
 	sim_body.previous_locations.resize(num_prev_positions)
 	sim_body.previous_locations.fill(pos)
 	body.sim_body = sim_body

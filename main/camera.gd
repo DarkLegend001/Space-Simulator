@@ -4,12 +4,12 @@ extends Camera3D
 @export var precision_mult := 0.05
 @export var rot_sensitivity := 0.0025
 @export var pan_sensitivity := 0.1
-@export var zoom_sensitivity := 2
-@export var zoom_side_sensitivity := 0.0024 * zoom_sensitivity
+@export var zoom_sensitivity := 2.0
+var zoom_side_sensitivity := 0.0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	pass
 
 func move(dir: Vector3):
 	position += dir
@@ -25,12 +25,12 @@ func _unhandled_input(event):
 		var speed: Vector3 = Vector3.ZERO
 		var mouse_pos = get_viewport().get_mouse_position() - get_viewport().get_visible_rect().size / 2
 		if event.button_index == MOUSE_BUTTON_WHEEL_UP:
-			speed.x += mouse_pos.x * zoom_side_sensitivity * (2.0 ** (event.factor if event.factor else 1.0))
-			speed.y -= mouse_pos.y * zoom_side_sensitivity * (2.0 ** (event.factor if event.factor else 1.0))
+			speed.x += mouse_pos.x * zoom_side_sensitivity
+			speed.y -= mouse_pos.y * zoom_side_sensitivity
 			speed.z -= zoom_sensitivity * (2.0 ** (event.factor if event.factor else 1.0))
 		elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
-			speed.x -= mouse_pos.x * zoom_side_sensitivity * (2.0 ** (event.factor if event.factor else 1.0))
-			speed.y += mouse_pos.y * zoom_side_sensitivity * (2.0 ** (event.factor if event.factor else 1.0))
+			speed.x -= mouse_pos.x * zoom_side_sensitivity
+			speed.y += mouse_pos.y * zoom_side_sensitivity
 			speed.z += zoom_sensitivity * (2.0 ** (event.factor if event.factor else 1.0))
 		move(transform.basis * speed)
 
@@ -40,6 +40,9 @@ func _process(delta: float) -> void:
 	var speed = Vector3.ZERO
 	var rot_change = delta * 1
 	var rot_speed = Vector3.ZERO
+	
+	zoom_side_sensitivity = 2.85 * zoom_sensitivity / get_viewport().get_visible_rect().size.x
+	
 	if Input.is_action_pressed("camera_right"):
 		speed.x += change
 	if Input.is_action_pressed("camera_left"):
