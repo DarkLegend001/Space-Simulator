@@ -18,6 +18,7 @@ func _unhandled_input(event):
 			if abs(mouse_pos.x - planet_pos.x) < 20 and abs(mouse_pos.y - planet_pos.y) < 20:
 				selected_body = body
 				$FollowButton.button_pressed = selected_body.get_child(0).following
+				previous_toggle = $FollowButton.button_pressed
 				found = true
 				break
 		if not found:
