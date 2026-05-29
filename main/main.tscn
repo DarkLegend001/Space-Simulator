@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://dsqs3xrlrrvy4" path="res://main/camera.gd" id="2_c651c"]
 [ext_resource type="Script" uid="uid://blhqjkxxbsqqh" path="res://controller/simulation_controller.gd" id="2_kfbq2"]
 [ext_resource type="Texture2D" uid="uid://t3dsj4mralpl" path="res://assets/starmap_background.exr" id="2_xwkvk"]
+[ext_resource type="Script" uid="uid://ccup6blnahs87" path="res://main/gui.gd" id="5_3wy1v"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_c651c"]
 panorama = ExtResource("2_xwkvk")
@@ -23,7 +24,6 @@ ambient_light_color = Color(1, 1, 1, 1)
 reflected_light_source = 2
 
 [node name="Main" type="Node" unique_id=1603506809]
-physics_interpolation_mode = 2
 script = ExtResource("1_53q0u")
 
 [node name="SimulationController" type="Node" parent="." unique_id=391052692]
@@ -39,3 +39,39 @@ environment = SubResource("Environment_53q0u")
 [node name="CelestialBodies" type="Node" parent="." unique_id=1477786834]
 
 [node name="CelestialPaths" type="Node" parent="." unique_id=1402288860]
+
+[node name="GUI" type="Control" parent="." unique_id=303294077]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("5_3wy1v")
+
+[node name="FollowButton" type="CheckBox" parent="GUI" unique_id=357538395]
+clip_contents = true
+layout_mode = 0
+offset_right = 102.0
+offset_bottom = 31.0
+action_mode = 0
+text = "Following"
+
+[node name="Name" type="Label" parent="GUI" unique_id=973065738]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 30.0
+offset_right = 60.0
+offset_bottom = 53.0
+
+[node name="Position" type="Label" parent="GUI" unique_id=2039833713]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 60.0
+offset_right = 60.0
+offset_bottom = 83.0
+
+[node name="Velocity" type="Label" parent="GUI" unique_id=1943205433]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 90.0
+offset_right = 60.0
+offset_bottom = 113.0
