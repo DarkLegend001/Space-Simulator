@@ -24,33 +24,41 @@ func _unhandled_input(event):
 		if not found:
 			selected_body = null
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	if selected_body == null: 
-		visible = false
-	else:
-		visible = true
-		if previous_toggle != $FollowButton.button_pressed:
-			previous_toggle = $FollowButton.button_pressed
-			if $FollowButton.button_pressed:
-				for body in $"../CelestialBodies".get_children():
-					body.get_child(0).following = false
-				follow_body = selected_body
-				follow_body.get_child(0).following = true
-			else:
-				for body in $"../CelestialBodies".get_children():
-					body.get_child(0).following = false
-				follow_body = null
-		
-		if selected_body == null:
-			$Name.text = ""
-			$Position.text = ""
-			$Velocity.text = ""
+func handle_follow():
+	if previous_toggle != $FollowButton.button_pressed:
+		previous_toggle = $FollowButton.button_pressed
+		if $FollowButton.button_pressed:
+			for body in $"../CelestialBodies".get_children():
+				body.get_child(0).following = false
+			follow_body = selected_body
+			follow_body.get_child(0).following = true
 		else:
-			$Name.text = selected_body.sim_body.name
+			for body in $"../CelestialBodies".get_children():
+				body.get_child(0).following = false
+			follow_body = null
+
+func update_labels():
+	if selected_body == null:
+		$Name.text = ""
+		$Position.text = ""
+		$Velocity.text = ""
+	else:
+		$Name.text = selected_body.sim_body.name
+		if $OrbitalDisplayButton.button_pressed:
+			pass
+		else:
 			if follow_body == null:
 				$Position.text = "Position: " + str(selected_body.sim_body.pos)
 				$Velocity.text = "Velocity: " + str(selected_body.sim_body.vel)
 			else:
 				$Position.text = "Position: " + str(selected_body.sim_body.pos - follow_body.sim_body.pos)
 				$Velocity.text = "Velocity: " + str(selected_body.sim_body.vel - follow_body.sim_body.vel)
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	if selected_body == null: 
+		visible = false
+	else:
+		visible = true
+		handle_follow()
+		update_labels()
