@@ -14,16 +14,19 @@ var previous_paths: Array
 # seconds of physics per predicted timestep
 @export var prediction_timestep := 36000
 # predictions per second
-@export var prediction_speed := 5
+@export var prediction_speed := 60
 # number of previous positions stored
-@export var num_prev_positions := 500
+@export var num_prev_positions := 400
 # number of times previous positions are stored per second
-@export var store_speed := 30
+@export var store_speed := 5
+# number of times previous positions are rendered per second
+@export var render_store_speed := 65
 
 
 var elapsed_update_time := 1.0 / speed
 var elapsed_prediction_time := 1.0 / prediction_speed
-var elapsed_store_time := 1.0 / prediction_speed
+var elapsed_store_time := 1.0 / store_speed
+var elapsed_render_store_time := 1.0 / render_store_speed
 
 var celestial_body_scene = preload("res://main/celestial_body.tscn")
 var celestial_path_scene = preload("res://rendering/celestial_path_renderer.tscn")
@@ -44,15 +47,21 @@ func move_camera(velocity: Vector3, delta: float):
 func _process(delta: float) -> void:
 	elapsed_prediction_time += delta
 	elapsed_store_time += delta
+	elapsed_render_store_time += delta
+	
 	var follow_body = null
 	for body in $"../CelestialBodies".get_children():
 		if body.get_child(0).following == true:
 			follow_body = body.sim_body
 			break
+	
 	if elapsed_store_time > 1.0 / store_speed:
 		elapsed_store_time = 0
 		for body in main_simulation.celestial_bodies:
-			body.previous_locations.push_pop(body.pos)
+			body.previous_locations.insert_pop(body.pos)
+	
+	if elapsed_render_store_time > 1.0 / render_store_speed:
+		elapsed_render_store_time = 0
 		if follow_body == null:
 			for i in range(prediction_paths.size()):
 				previous_paths[i].generate_mesh(main_simulation.celestial_bodies[i].previous_locations.get_data())
@@ -60,8 +69,9 @@ func _process(delta: float) -> void:
 			for i in range(prediction_paths.size()):
 				var new_path = main_simulation.celestial_bodies[i].previous_locations.duplicate()
 				for j in range(new_path.size()):
-					new_path.set_value(j, new_path.get_value(j) - (follow_body.previous_locations.get_value(j) - follow_body.previous_locations.get_value(0)))
+					new_path.set_value(j, new_path.get_value(j) - (follow_body.previous_locations.get_value(j) - follow_body.pos))
 				previous_paths[i].generate_mesh(new_path.get_data())
+	
 	if elapsed_prediction_time > 1.0 / prediction_speed:
 		elapsed_prediction_time = 0
 		var curves: Array

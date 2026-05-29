@@ -22,8 +22,8 @@ func fill(value):
 	for i in range(data.size()):
 		data[i] = value
 
-## removes oldest value and replaces it with a new value
-func push_pop(new_value):
+## pops the first value off of the array and pushes the passed value to the end. No Array resizing or shifting
+func append_pop(new_value):
 	var old_value = data[index]
 	data[index] = new_value
 	index += 1
@@ -31,14 +31,25 @@ func push_pop(new_value):
 		index = 0
 	return old_value
 
+## pops the last value off of the array and pushes the passed value to the start. No Array resizing or shifting
+func insert_pop(new_value):
+	var old_value = data[index - 1 if index != 0 else data.size() - 1]
+	data[index - 1 if index != 0 else data.size() - 1] = new_value
+	index -= 1
+	if index == -1:
+		index = data.size() - 1
+	return old_value
+
 ## gets the value at an index
 func get_value(value_index):
 	return data[value_index + index] if value_index + index < data.size() else data[value_index + index - data.size()]
 
+## sets the value of an index
 func set_value(value_index, value):
 	var adjusted_index = value_index + index if value_index + index < data.size() else value_index + index - data.size()
 	data[adjusted_index] = value
 
+## returns the array of data compensated for index shifting
 func get_data() -> Array:
 	var return_array = Array()
 	var return_index = index
