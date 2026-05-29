@@ -9,6 +9,15 @@ func _init():
 func resize(size: int):
 	data.resize(size)
 
+func size() -> int:
+	return data.size()
+
+func duplicate() -> EfficientArray:
+	var clone = EfficientArray.new()
+	clone.data = data.duplicate()
+	clone.index = index
+	return clone
+
 func fill(value):
 	for i in range(data.size()):
 		data[i] = value
@@ -24,7 +33,11 @@ func push_pop(new_value):
 
 ## gets the value at an index
 func get_value(value_index):
-	return data[value_index + index] if index < data.size() else data[value_index + index - data.size()]
+	return data[value_index + index] if value_index + index < data.size() else data[value_index + index - data.size()]
+
+func set_value(value_index, value):
+	var adjusted_index = value_index + index if value_index + index < data.size() else value_index + index - data.size()
+	data[adjusted_index] = value
 
 func get_data() -> Array:
 	var return_array = Array()
