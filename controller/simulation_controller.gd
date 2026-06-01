@@ -16,14 +16,17 @@ var previous_paths: Array
 # predictions per second
 @export var prediction_speed := 60
 # number of previous positions stored
-@export var num_prev_positions := 200
+@export var num_prev_positions := 400
 # number of times previous positions are stored per second
-@export var store_speed := 60
+@export var store_speed := 5
+# number of times previous positions are rendered per second
+@export var render_store_speed := 65
 
 
-var elapsed_update_time := 0.0
+var elapsed_update_time := 1.0 / speed
 var elapsed_prediction_time := 1.0 / prediction_speed
-var elapsed_store_time := 1.0 / prediction_speed
+var elapsed_store_time := 1.0 / store_speed
+var elapsed_render_store_time := 1.0 / render_store_speed
 
 var celestial_body_scene = preload("res://main/celestial_body.tscn")
 var celestial_path_scene = preload("res://rendering/celestial_path_renderer.tscn")
@@ -44,25 +47,31 @@ func move_camera(velocity: Vector3, delta: float):
 func _process(delta: float) -> void:
 	elapsed_prediction_time += delta
 	elapsed_store_time += delta
+	elapsed_render_store_time += delta
+	
 	var follow_body = null
 	for body in $"../CelestialBodies".get_children():
 		if body.get_child(0).following == true:
 			follow_body = body.sim_body
 			break
+	
 	if elapsed_store_time > 1.0 / store_speed:
 		elapsed_store_time = 0
 		for body in main_simulation.celestial_bodies:
-			body.previous_locations.insert(0, body.pos)
-			body.previous_locations.remove_at(num_prev_positions)
+			body.previous_locations.insert_pop(body.pos)
+	
+	if elapsed_render_store_time > 1.0 / render_store_speed:
+		elapsed_render_store_time = 0
 		if follow_body == null:
 			for i in range(prediction_paths.size()):
-				previous_paths[i].generate_mesh(main_simulation.celestial_bodies[i].previous_locations)
+				previous_paths[i].generate_mesh(main_simulation.celestial_bodies[i].previous_locations.get_data())
 		else:
 			for i in range(prediction_paths.size()):
 				var new_path = main_simulation.celestial_bodies[i].previous_locations.duplicate()
 				for j in range(new_path.size()):
-					new_path[j] -= follow_body.previous_locations[j] - follow_body.previous_locations[0]
-				previous_paths[i].generate_mesh(new_path)
+					new_path.set_value(j, new_path.get_value(j) - (follow_body.previous_locations.get_value(j) - follow_body.pos))
+				previous_paths[i].generate_mesh(new_path.get_data())
+	
 	if elapsed_prediction_time > 1.0 / prediction_speed:
 		elapsed_prediction_time = 0
 		var curves: Array
@@ -124,28 +133,35 @@ func load_presets():
 # returns a 2d array of Vector3s
 func get_predicted_curves() -> Array:
 	var calc_paths = Array()
-	for i in range(main_simulation.celestial_bodies.size()):
-		calc_paths.append(PackedVector3Array())
 	var prediction_sim: Simulation = main_simulation.duplicate()
+	calc_paths.resize(main_simulation.celestial_bodies.size())
+	for i in range(main_simulation.celestial_bodies.size()):
+		calc_paths[i] = PackedVector3Array()
+	for arr in calc_paths:
+		arr.resize(prediction_length)
 	for i in range(prediction_length):
 		for j in range(main_simulation.celestial_bodies.size()):
-			calc_paths[j].append(prediction_sim.celestial_bodies[j].pos)
+			calc_paths[j][i] = prediction_sim.celestial_bodies[j].pos
 		prediction_sim.update(prediction_timestep)
 	return calc_paths
 
 func get_relative_predicted_curves(body: CelestialBodySimulation) -> Array:
 	var calc_paths = Array()
-	for i in range(main_simulation.celestial_bodies.size()):
-		calc_paths.append(PackedVector3Array())
 	var prediction_sim: Simulation = main_simulation.duplicate()
 	var relative_body: CelestialBodySimulation
+	var initial_relative_body_pos
+	calc_paths.resize(main_simulation.celestial_bodies.size())
+	for i in range(main_simulation.celestial_bodies.size()):
+		calc_paths[i] = PackedVector3Array()
+	for arr in calc_paths:
+		arr.resize(prediction_length)
 	for prediction_body in prediction_sim.celestial_bodies:
 		if prediction_body.name == body.name:
 			relative_body = prediction_body
 			break
-	var initial_relative_body_pos = relative_body.pos
+	initial_relative_body_pos = relative_body.pos
 	for i in range(prediction_length):
-		for j in range(prediction_sim.celestial_bodies.size()):
-			calc_paths[j].append(prediction_sim.celestial_bodies[j].pos - (relative_body.pos - initial_relative_body_pos))
+		for j in range(main_simulation.celestial_bodies.size()):
+			calc_paths[j][i] = prediction_sim.celestial_bodies[j].pos - (relative_body.pos - initial_relative_body_pos)
 		prediction_sim.update(prediction_timestep)
 	return calc_paths

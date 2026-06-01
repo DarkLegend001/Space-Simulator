@@ -18,7 +18,7 @@ var radius: float
 var name: String
 
 # List of previous locations
-var previous_locations: Array
+var previous_locations: EfficientArray
 
 # Only used in the calculations for other attributes
 # Mm/s^2
@@ -36,7 +36,7 @@ func init_vars(name: String, pos: Vector3, vel: Vector3, rot_vel: Vector3, mass:
 	self.rot_vel = rot_vel
 	self.mass = mass
 	self.radius = radius
-	self.previous_locations = Array()
+	self.previous_locations = EfficientArray.new()
 
 func duplicate() -> CelestialBodySimulation:
 	var new_body = CelestialBodySimulation.new()

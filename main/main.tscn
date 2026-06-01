@@ -30,7 +30,7 @@ script = ExtResource("1_53q0u")
 script = ExtResource("2_kfbq2")
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=374710754]
-transform = Transform3D(1, 0, 0, 0, 1.1924881e-08, 1, 0, -1, 1.1924881e-08, 0, 200, 0)
+transform = Transform3D(1, 0, 0, 0, 1.1924881e-08, 1, 0, -1, 1.1924881e-08, 0, 300, 0)
 script = ExtResource("2_c651c")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=408548995]
@@ -55,23 +55,31 @@ offset_bottom = 31.0
 action_mode = 0
 text = "Following"
 
-[node name="Name" type="Label" parent="GUI" unique_id=973065738]
+[node name="OrbitalDisplayButton" type="CheckBox" parent="GUI" unique_id=1668791873]
 layout_mode = 0
-offset_left = 20.0
 offset_top = 30.0
-offset_right = 60.0
-offset_bottom = 53.0
+offset_right = 24.0
+offset_bottom = 54.0
+action_mode = 0
+text = "Orbital Parameters"
 
-[node name="Position" type="Label" parent="GUI" unique_id=2039833713]
+[node name="Name" type="Label" parent="GUI" unique_id=973065738]
 layout_mode = 0
 offset_left = 20.0
 offset_top = 60.0
 offset_right = 60.0
 offset_bottom = 83.0
 
-[node name="Velocity" type="Label" parent="GUI" unique_id=1943205433]
+[node name="Position" type="Label" parent="GUI" unique_id=2039833713]
 layout_mode = 0
 offset_left = 20.0
 offset_top = 90.0
 offset_right = 60.0
 offset_bottom = 113.0
+
+[node name="Velocity" type="Label" parent="GUI" unique_id=1943205433]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 120.0
+offset_right = 60.0
+offset_bottom = 143.0
