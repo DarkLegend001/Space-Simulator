@@ -2,9 +2,10 @@ extends Camera3D
 
 @export var precision := false
 @export var precision_mult := 0.05
+@export var sensitivity := 1e9 / Globals.distance_scale
 @export var rot_sensitivity := 0.0025
-@export var pan_sensitivity := 0.1
-@export var zoom_sensitivity := 2.0
+@export var pan_sensitivity := 3e8 / Globals.distance_scale
+@export var zoom_sensitivity := 4.0
 var zoom_side_sensitivity := 0.0
 
 # Called when the node enters the scene tree for the first time.
@@ -36,7 +37,6 @@ func _unhandled_input(event):
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	var change = delta * 1e5 / Globals.distance_scale
 	var speed = Vector3.ZERO
 	var rot_change = delta * 1
 	var rot_speed = Vector3.ZERO
@@ -44,17 +44,17 @@ func _process(delta: float) -> void:
 	zoom_side_sensitivity = 2.775 * zoom_sensitivity / get_viewport().get_visible_rect().size.x
 	
 	if Input.is_action_pressed("camera_right"):
-		speed.x += change
+		speed.x += sensitivity
 	if Input.is_action_pressed("camera_left"):
-		speed.x -= change
+		speed.x -= sensitivity
 	if Input.is_action_pressed("camera_up"):
-		speed.y += change
+		speed.y += sensitivity
 	if Input.is_action_pressed("camera_down"):
-		speed.y -= change
+		speed.y -= sensitivity
 	if Input.is_action_pressed("camera_forward"):
-		speed.z -= change
+		speed.z -= sensitivity
 	if Input.is_action_pressed("camera_back"):
-		speed.z += change
+		speed.z += sensitivity
   
 	if Input.is_action_pressed("camera_rotate_right"):
 		rot_speed.x -= rot_change

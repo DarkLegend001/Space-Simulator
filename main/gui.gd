@@ -53,11 +53,11 @@ func update_labels():
 			var follow_sim_body = follow_body.sim_body
 			var elements = PhysicsCalculator.get_elements((selected_sim_body.pos - follow_sim_body.pos), (selected_sim_body.vel - follow_sim_body.vel), follow_sim_body.mass, selected_sim_body.mass)
 			$Label1.text = "Semi-Major Axis: " + PhysicsCalculator.get_scientific_notation(elements["semi-major axis"])
-			$Label2.text = "Eccentricity: " + PhysicsCalculator.get_scientific_notation(elements["eccentricity"])
-			$Label3.text = "Inclination: " + PhysicsCalculator.get_scientific_notation(elements["inclination"])
-			$Label4.text = "Right Ascension: " + PhysicsCalculator.get_scientific_notation(elements["right ascension"])
-			$Label5.text = "Perigee: " + PhysicsCalculator.get_scientific_notation(elements["perigee"])
-			$Label6.text = "True Anomaly: " + PhysicsCalculator.get_scientific_notation(elements["true anomaly"])
+			$Label2.text = "Eccentricity: " + str(snapped(elements["eccentricity"], 1e-3))
+			$Label3.text = "Inclination: " + str(snapped(elements["inclination"], 1e-3))
+			$Label4.text = "Right Ascension: " + str(snapped(elements["right ascension"], 1e-3))
+			$Label5.text = "Perigee: " + str(snapped(elements["perigee"], 1e-3))
+			$Label6.text = "True Anomaly: " +str(snapped(elements["true anomaly"], 1e-3))
 		else:
 			$Label3.text = ""
 			$Label4.text = ""
