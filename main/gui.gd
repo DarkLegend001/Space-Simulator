@@ -39,20 +39,40 @@ func handle_follow():
 
 func update_labels():
 	if selected_body == null:
-		$Name.text = ""
-		$Position.text = ""
-		$Velocity.text = ""
+		$Label0.text = ""
+		$Label1.text = ""
+		$Label2.text = ""
+		$Label3.text = ""
+		$Label4.text = ""
+		$Label5.text = ""
+		$Label6.text = ""
 	else:
-		$Name.text = selected_body.sim_body.name
-		if $OrbitalDisplayButton.button_pressed:
-			pass
+		$Label0.text = selected_body.sim_body.name
+		if $OrbitalDisplayButton.button_pressed and follow_body != null:
+			var selected_sim_body = selected_body.sim_body
+			var follow_sim_body = follow_body.sim_body
+			var elements = PhysicsCalculator.get_elements((selected_sim_body.pos - follow_sim_body.pos), (selected_sim_body.vel - follow_sim_body.vel), follow_sim_body.mass, selected_sim_body.mass)
+			$Label1.text = "Semi-Major Axis: " + PhysicsCalculator.get_scientific_notation(elements["semi-major axis"])
+			$Label2.text = "Eccentricity: " + PhysicsCalculator.get_scientific_notation(elements["eccentricity"])
+			$Label3.text = "Inclination: " + PhysicsCalculator.get_scientific_notation(elements["inclination"])
+			$Label4.text = "Right Ascension: " + PhysicsCalculator.get_scientific_notation(elements["right ascension"])
+			$Label5.text = "Perigee: " + PhysicsCalculator.get_scientific_notation(elements["perigee"])
+			$Label6.text = "True Anomaly: " + PhysicsCalculator.get_scientific_notation(elements["true anomaly"])
 		else:
+			$Label3.text = ""
+			$Label4.text = ""
+			$Label5.text = ""
+			$Label6.text = ""
 			if follow_body == null:
-				$Position.text = "Position: " + str(selected_body.sim_body.pos)
-				$Velocity.text = "Velocity: " + str(selected_body.sim_body.vel)
+				$Label1.text = "Position: " + str(selected_body.sim_body.pos)
+				$Label2.text = "Distance: " + PhysicsCalculator.get_scientific_notation(selected_body.sim_body.pos.length())
+				$Label3.text = "Velocity: " + str(selected_body.sim_body.vel)
+				$Label4.text = "Speed: " + PhysicsCalculator.get_scientific_notation(selected_body.sim_body.vel.length())
 			else:
-				$Position.text = "Position: " + str(selected_body.sim_body.pos - follow_body.sim_body.pos)
-				$Velocity.text = "Velocity: " + str(selected_body.sim_body.vel - follow_body.sim_body.vel)
+				$Label1.text = "Position: " + str(selected_body.sim_body.pos - follow_body.sim_body.pos)
+				$Label2.text = "Distance: " + PhysicsCalculator.get_scientific_notation((selected_body.sim_body.pos - follow_body.sim_body.pos).length())
+				$Label3.text = "Velocity: " + str(selected_body.sim_body.vel - follow_body.sim_body.vel)
+				$Label4.text = "Speed: " + PhysicsCalculator.get_scientific_notation((selected_body.sim_body.vel - follow_body.sim_body.vel).length())
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

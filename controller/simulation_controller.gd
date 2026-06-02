@@ -10,15 +10,15 @@ var previous_paths: Array
 @export var timestep := 300
 
 # number of timesteps for each prediction
-@export var prediction_length := 100
+@export var prediction_length := 500
 # seconds of physics per predicted timestep
 @export var prediction_timestep := 36000
 # predictions per second
-@export var prediction_speed := 60
+@export var prediction_speed := 10
 # number of previous positions stored
-@export var num_prev_positions := 400
+@export var num_prev_positions := 300
 # number of times previous positions are stored per second
-@export var store_speed := 5
+@export var store_speed := 1
 # number of times previous positions are rendered per second
 @export var render_store_speed := 65
 
