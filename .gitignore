@@ -11,6 +11,10 @@ export_credentials.cfg
 # Imported translations (automatically generated from CSV files)
 *.translation
 
+# Large excecutables
+*.exe
+*.x86_64
+
 # Mono-specific ignores
 .mono/
 data_*/
