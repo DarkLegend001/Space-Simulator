@@ -5,6 +5,7 @@
 [ext_resource type="Script" uid="uid://blhqjkxxbsqqh" path="res://controller/simulation_controller.gd" id="2_kfbq2"]
 [ext_resource type="Texture2D" uid="uid://t3dsj4mralpl" path="res://assets/starmap_background.exr" id="2_xwkvk"]
 [ext_resource type="Script" uid="uid://ccup6blnahs87" path="res://main/gui.gd" id="5_3wy1v"]
+[ext_resource type="Script" uid="uid://co1anfd316w0i" path="res://main/settings.gd" id="6_kfbq2"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_c651c"]
 panorama = ExtResource("2_xwkvk")
@@ -13,24 +14,29 @@ energy_multiplier = 5.78
 
 [sub_resource type="Sky" id="Sky_3wy1v"]
 sky_material = SubResource("PanoramaSkyMaterial_c651c")
+process_mode = 1
 radiance_size = 2
 
 [sub_resource type="Environment" id="Environment_53q0u"]
 background_mode = 2
+background_color = Color(0.31135654, 0.31135657, 0.31135654, 1)
 background_energy_multiplier = 0.25
 sky = SubResource("Sky_3wy1v")
 ambient_light_source = 3
 ambient_light_color = Color(1, 1, 1, 1)
-reflected_light_source = 2
+reflected_light_source = 1
 
 [node name="Main" type="Node" unique_id=1603506809]
+process_mode = 1
 script = ExtResource("1_53q0u")
 
 [node name="SimulationController" type="Node" parent="." unique_id=391052692]
 script = ExtResource("2_kfbq2")
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=374710754]
+process_mode = 3
 transform = Transform3D(1, 0, 0, 0, 1.1924881e-08, 1, 0, -1, 1.1924881e-08, 0, 300, 0)
+near = 0.1
 script = ExtResource("2_c651c")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=408548995]
@@ -40,74 +46,125 @@ environment = SubResource("Environment_53q0u")
 
 [node name="CelestialPaths" type="Node" parent="." unique_id=1402288860]
 
-[node name="GUI" type="Control" parent="." unique_id=303294077]
+[node name="PlanetMenu" type="Control" parent="." unique_id=303294077]
+process_mode = 3
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("5_3wy1v")
 
-[node name="FollowButton" type="CheckBox" parent="GUI" unique_id=357538395]
-clip_contents = true
+[node name="FollowButton" type="CheckButton" parent="PlanetMenu" unique_id=947583743]
 layout_mode = 0
-offset_right = 102.0
-offset_bottom = 31.0
-action_mode = 0
-text = "Following"
+offset_right = 44.0
+offset_bottom = 24.0
 
-[node name="OrbitalDisplayButton" type="CheckBox" parent="GUI" unique_id=1668791873]
+[node name="OrbitalDisplayButton" type="CheckButton" parent="PlanetMenu" unique_id=835590940]
 layout_mode = 0
-offset_top = 30.0
-offset_right = 24.0
-offset_bottom = 54.0
-action_mode = 0
-text = "Orbital Parameters"
+offset_right = 44.0
+offset_bottom = 24.0
 
-[node name="Label0" type="Label" parent="GUI" unique_id=1634069099]
+[node name="Label0" type="Label" parent="PlanetMenu" unique_id=1634069099]
 layout_mode = 0
 offset_left = 20.0
 offset_top = 60.0
 offset_right = 60.0
 offset_bottom = 83.0
 
-[node name="Label1" type="Label" parent="GUI" unique_id=2039833713]
+[node name="Label1" type="Label" parent="PlanetMenu" unique_id=2039833713]
 layout_mode = 0
 offset_left = 20.0
 offset_top = 90.0
 offset_right = 60.0
 offset_bottom = 113.0
 
-[node name="Label2" type="Label" parent="GUI" unique_id=1943205433]
+[node name="Label2" type="Label" parent="PlanetMenu" unique_id=1943205433]
 layout_mode = 0
 offset_left = 20.0
 offset_top = 120.0
 offset_right = 60.0
 offset_bottom = 143.0
 
-[node name="Label3" type="Label" parent="GUI" unique_id=44361129]
+[node name="Label3" type="Label" parent="PlanetMenu" unique_id=44361129]
 layout_mode = 0
 offset_left = 20.0
 offset_top = 150.0
 offset_right = 60.0
 offset_bottom = 173.0
 
-[node name="Label4" type="Label" parent="GUI" unique_id=354126766]
+[node name="Label4" type="Label" parent="PlanetMenu" unique_id=354126766]
 layout_mode = 0
 offset_left = 20.0
 offset_top = 180.0
 offset_right = 60.0
 offset_bottom = 203.0
 
-[node name="Label5" type="Label" parent="GUI" unique_id=289862488]
+[node name="Label5" type="Label" parent="PlanetMenu" unique_id=289862488]
 layout_mode = 0
 offset_left = 20.0
 offset_top = 210.0
 offset_right = 60.0
 offset_bottom = 233.0
 
-[node name="Label6" type="Label" parent="GUI" unique_id=973065738]
+[node name="Label6" type="Label" parent="PlanetMenu" unique_id=973065738]
 layout_mode = 0
 offset_left = 20.0
 offset_top = 240.0
 offset_right = 60.0
 offset_bottom = 263.0
+
+[node name="Settings" type="Control" parent="." unique_id=1361791977]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("6_kfbq2")
+
+[node name="TimeStepSlider" type="SpinBox" parent="Settings" unique_id=795282054]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 0
+offset_top = 24.0
+offset_right = 86.5
+offset_bottom = 55.0
+max_value = 10000.0
+value = 300.0
+allow_greater = true
+prefix = "Timestep:"
+suffix = "s"
+custom_arrow_step = 50.0
+
+[node name="GameSpeedSlider" type="SpinBox" parent="Settings" unique_id=2144417864]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 0
+offset_top = 48.0
+offset_right = 86.5
+offset_bottom = 79.0
+max_value = 10000.0
+value = 500.0
+allow_greater = true
+prefix = "Speed:"
+suffix = "Hz"
+custom_arrow_step = 50.0
+
+[node name="PauseButton" type="CheckButton" parent="Settings" unique_id=2000678518]
+layout_mode = 0
+offset_top = 72.0
+offset_right = 182.0
+offset_bottom = 103.0
+action_mode = 0
+text = "Pause Simulation"
+
+[node name="DynamicLightingButton" type="CheckButton" parent="Settings" unique_id=497439570]
+layout_mode = 0
+offset_top = 96.0
+offset_right = 238.0
+offset_bottom = 127.0
+text = "Disable Dynamic Lighting"
+
+[node name="BackgroundButton" type="CheckButton" parent="Settings" unique_id=2120478995]
+layout_mode = 0
+offset_top = 120.0
+offset_right = 198.0
+offset_bottom = 151.0
+text = "Disable Background"
