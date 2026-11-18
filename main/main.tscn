@@ -50,121 +50,184 @@ environment = SubResource("Environment_53q0u")
 process_mode = 3
 layout_mode = 3
 anchors_preset = 0
-offset_right = 40.0
+offset_left = 14.0
+offset_right = 54.0
 offset_bottom = 40.0
 script = ExtResource("5_3wy1v")
 
 [node name="FollowButton" type="CheckButton" parent="PlanetMenu" unique_id=947583743]
 layout_mode = 0
-offset_right = 44.0
-offset_bottom = 24.0
+offset_right = 99.0
+offset_bottom = 31.0
+text = "Follow"
 
 [node name="OrbitalDisplayButton" type="CheckButton" parent="PlanetMenu" unique_id=835590940]
 layout_mode = 0
-offset_right = 44.0
-offset_bottom = 24.0
+offset_top = 27.5
+offset_right = 197.0
+offset_bottom = 58.5
+text = "Orbital Parameters"
 
 [node name="Label0" type="Label" parent="PlanetMenu" unique_id=1634069099]
 layout_mode = 0
-offset_left = 20.0
+offset_left = 6.0
 offset_top = 60.0
-offset_right = 60.0
+offset_right = 46.0
 offset_bottom = 83.0
 
 [node name="Label1" type="Label" parent="PlanetMenu" unique_id=2039833713]
 layout_mode = 0
-offset_left = 20.0
+offset_left = 6.0
 offset_top = 90.0
-offset_right = 60.0
+offset_right = 46.0
 offset_bottom = 113.0
 
 [node name="Label2" type="Label" parent="PlanetMenu" unique_id=1943205433]
 layout_mode = 0
-offset_left = 20.0
+offset_left = 6.0
 offset_top = 120.0
-offset_right = 60.0
+offset_right = 46.0
 offset_bottom = 143.0
 
 [node name="Label3" type="Label" parent="PlanetMenu" unique_id=44361129]
 layout_mode = 0
-offset_left = 20.0
+offset_left = 6.0
 offset_top = 150.0
-offset_right = 60.0
+offset_right = 46.0
 offset_bottom = 173.0
 
 [node name="Label4" type="Label" parent="PlanetMenu" unique_id=354126766]
 layout_mode = 0
-offset_left = 20.0
+offset_left = 6.0
 offset_top = 180.0
-offset_right = 60.0
+offset_right = 46.0
 offset_bottom = 203.0
 
 [node name="Label5" type="Label" parent="PlanetMenu" unique_id=289862488]
 layout_mode = 0
-offset_left = 20.0
+offset_left = 6.0
 offset_top = 210.0
-offset_right = 60.0
+offset_right = 46.0
 offset_bottom = 233.0
 
 [node name="Label6" type="Label" parent="PlanetMenu" unique_id=973065738]
 layout_mode = 0
-offset_left = 20.0
+offset_left = 6.0
 offset_top = 240.0
-offset_right = 60.0
+offset_right = 46.0
 offset_bottom = 263.0
+
+[node name="ShowSettingsButton" type="CheckButton" parent="." unique_id=1879111488]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -31.0
+offset_right = 155.0
+grow_vertical = 0
+text = "Show settings"
 
 [node name="Settings" type="Control" parent="." unique_id=1361791977]
 process_mode = 3
 layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 14.0
+offset_top = -348.0
+offset_right = 54.0
+offset_bottom = -308.0
+grow_vertical = 0
 script = ExtResource("6_kfbq2")
-
-[node name="TimeStepSlider" type="SpinBox" parent="Settings" unique_id=795282054]
-custom_minimum_size = Vector2(150, 0)
-layout_mode = 0
-offset_top = 24.0
-offset_right = 86.5
-offset_bottom = 55.0
-max_value = 10000.0
-value = 300.0
-allow_greater = true
-prefix = "Timestep:"
-suffix = "s"
-custom_arrow_step = 50.0
-
-[node name="GameSpeedSlider" type="SpinBox" parent="Settings" unique_id=2144417864]
-custom_minimum_size = Vector2(150, 0)
-layout_mode = 0
-offset_top = 48.0
-offset_right = 86.5
-offset_bottom = 79.0
-max_value = 10000.0
-value = 500.0
-allow_greater = true
-prefix = "Speed:"
-suffix = "Hz"
-custom_arrow_step = 50.0
 
 [node name="PauseButton" type="CheckButton" parent="Settings" unique_id=2000678518]
 layout_mode = 0
-offset_top = 72.0
+offset_top = 30.0
 offset_right = 182.0
-offset_bottom = 103.0
+offset_bottom = 61.0
 action_mode = 0
 text = "Pause Simulation"
 
 [node name="DynamicLightingButton" type="CheckButton" parent="Settings" unique_id=497439570]
 layout_mode = 0
-offset_top = 96.0
-offset_right = 238.0
-offset_bottom = 127.0
+offset_top = 60.0
+offset_right = 243.0
+offset_bottom = 91.0
 text = "Disable Dynamic Lighting"
 
 [node name="BackgroundButton" type="CheckButton" parent="Settings" unique_id=2120478995]
 layout_mode = 0
-offset_top = 120.0
-offset_right = 198.0
-offset_bottom = 151.0
+offset_top = 90.0
+offset_right = 202.0
+offset_bottom = 121.0
 text = "Disable Background"
+
+[node name="TimeStepSlider" type="SpinBox" parent="Settings" unique_id=795282054]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 0
+offset_top = 120.0
+offset_right = 150.0
+offset_bottom = 151.0
+max_value = 1000.0
+value = 100.0
+allow_greater = true
+prefix = "Simulation Timestep:"
+suffix = "s"
+custom_arrow_step = 50.0
+
+[node name="GameSpeedSlider" type="SpinBox" parent="Settings" unique_id=2144417864]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 0
+offset_top = 150.0
+offset_right = 150.0
+offset_bottom = 181.0
+value = 100.0
+allow_greater = true
+prefix = "Simulation Speed:"
+suffix = "Hz"
+custom_arrow_step = 50.0
+
+[node name="PredictionLengthSlider" type="SpinBox" parent="Settings" unique_id=1653577251]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 0
+offset_top = 180.0
+offset_right = 200.0
+offset_bottom = 211.0
+max_value = 10000.0
+value = 500.0
+rounded = true
+allow_greater = true
+prefix = "Predicted timesteps:"
+
+[node name="PredictionTimeSlider" type="SpinBox" parent="Settings" unique_id=1133234131]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 0
+offset_top = 210.0
+offset_right = 86.5
+offset_bottom = 241.0
+max_value = 100000.0
+value = 36000.0
+allow_greater = true
+prefix = "Prediction Timestep:"
+suffix = "s"
+
+[node name="StoreNumSlider" type="SpinBox" parent="Settings" unique_id=1720038272]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 0
+offset_top = 240.0
+offset_right = 86.5
+offset_bottom = 271.0
+max_value = 100000.0
+value = 300.0
+allow_greater = true
+prefix = "Store timsteps:"
+
+[node name="StoreSpeedSlider" type="SpinBox" parent="Settings" unique_id=976973689]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 0
+offset_top = 270.0
+offset_right = 86.5
+offset_bottom = 301.0
+value = 10.0
+allow_greater = true
+prefix = "Position Storing:"
+suffix = "Hz"

@@ -10,8 +10,6 @@ func handle_paused() -> void:
 
 func handle_gamespeed() -> void:
 	Globals.speed = $GameSpeedSlider.value
-	
-func handle_gametick() -> void:
 	Globals.timestep = $TimeStepSlider.value
 
 func handle_background() -> void:
@@ -27,10 +25,23 @@ func handle_lighting() -> void:
 	else:
 		get_tree().root.debug_draw = Viewport.DEBUG_DRAW_DISABLED
 
+func handle_visible() -> void:
+	if ($"../ShowSettingsButton".button_pressed):
+		$"../Settings".visible = true
+	else:
+		$"../Settings".visible = false
+
+func handle_misc_variables() -> void:
+	Globals.prediction_length = $PredictionLengthSlider.value
+	Globals.prediction_timestep = $PredictionTimeSlider.value
+	Globals.store_speed = $StoreSpeedSlider.value
+	Globals.num_prev_positions = $StoreNumSlider.value
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	handle_paused()
 	handle_gamespeed()
-	handle_gametick()
 	handle_background()
 	handle_lighting()
+	handle_visible()
+	handle_misc_variables()

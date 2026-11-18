@@ -25,4 +25,4 @@ extends Node
 # number of times previous positions are stored per second
 @export var store_speed := 1
 # number of times previous positions are rendered per second
-@export var render_store_speed := 65
+@export var render_store_speed := 60
