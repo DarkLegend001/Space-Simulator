@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://cenhimtdta4pg"]
+
+[ext_resource type="Script" uid="uid://dx1ogdo6c2cls" path="res://main/planet_setting_line.gd" id="1_qikq4"]
+
+[node name="PlanetBox" type="HBoxContainer" unique_id=1125776960]
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_qikq4")
+
+[node name="NameLineEdit" type="LineEdit" parent="." unique_id=1091332321]
+layout_mode = 2
+
+[node name="XPosLineEdit" type="LineEdit" parent="." unique_id=824926417]
+layout_mode = 2
+
+[node name="YPosLineEdit" type="LineEdit" parent="." unique_id=1154323752]
+layout_mode = 2
+
+[node name="ZPosLineEdit" type="LineEdit" parent="." unique_id=1432092823]
+layout_mode = 2
+
+[node name="XVelLineEdit" type="LineEdit" parent="." unique_id=1748103172]
+layout_mode = 2
+
+[node name="YVelLineEdit" type="LineEdit" parent="." unique_id=1285446593]
+layout_mode = 2
+
+[node name="ZVelLineEdit" type="LineEdit" parent="." unique_id=1411767310]
+layout_mode = 2
+
+[node name="MassLineEdit" type="LineEdit" parent="." unique_id=1918155004]
+layout_mode = 2
+
+[node name="RadiusLineEdit" type="LineEdit" parent="." unique_id=857433389]
+layout_mode = 2
+
+[node name="LuminanceLineEdit" type="LineEdit" parent="." unique_id=1948169216]
+layout_mode = 2

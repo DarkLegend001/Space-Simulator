@@ -19,6 +19,7 @@ config/icon="uid://c7qxb4eoqcex1"
 [autoload]
 
 Globals="*uid://dmfxgs8t7n24a"
+Planets="*uid://bqw5v5hjcwdk6"
 
 [dotnet]
 
