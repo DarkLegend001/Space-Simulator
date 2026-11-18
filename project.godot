@@ -12,9 +12,9 @@ config_version=5
 
 config/name="Space Simulator"
 run/main_scene="uid://df11he65xalwp"
-config/features=PackedStringArray("4.6", "GL Compatibility")
+config/features=PackedStringArray("4.7", "GL Compatibility")
 run/max_fps=60
-config/icon="res://assets/icon.svg"
+config/icon="uid://c7qxb4eoqcex1"
 
 [autoload]
 
