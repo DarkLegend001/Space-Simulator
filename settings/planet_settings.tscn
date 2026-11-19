@@ -11,16 +11,15 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_royfy")
 
-[node name="PlanetLineParent" type="VBoxContainer" parent="." unique_id=874318325]
+[node name="ExitButton" type="Button" parent="." unique_id=2109256883]
 layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -20.0
-offset_top = 50.0
-offset_right = 20.0
-offset_bottom = 90.0
-grow_horizontal = 2
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -8.0
+offset_bottom = 8.0
+grow_horizontal = 0
+text = "Exit"
 
 [node name="SubmitButton" type="Button" parent="." unique_id=161048488]
 layout_mode = 1
@@ -39,13 +38,94 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = 10.0
-offset_top = 20.0
-offset_right = 50.0
-offset_bottom = 43.0
+offset_left = -20.0
+offset_top = 60.0
+offset_right = 20.0
+offset_bottom = 83.0
 grow_horizontal = 2
 
-[node name="ExitButton" type="Button" parent="." unique_id=2109256883]
-layout_mode = 0
-offset_right = 8.0
-offset_bottom = 8.0
+[node name="PlanetLineParent" type="VBoxContainer" parent="." unique_id=874318325]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_top = 100.0
+offset_right = 20.0
+offset_bottom = 140.0
+grow_horizontal = 2
+
+[node name="LabelContainer" type="HBoxContainer" parent="PlanetLineParent" unique_id=1859796568]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PlanetLineParent/LabelContainer" unique_id=251867515]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "Name"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="PlanetLineParent/LabelContainer" unique_id=1643067279]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "X Pos (m)"
+horizontal_alignment = 1
+
+[node name="Label3" type="Label" parent="PlanetLineParent/LabelContainer" unique_id=2079505372]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "Y Pos (m)"
+horizontal_alignment = 1
+
+[node name="Label4" type="Label" parent="PlanetLineParent/LabelContainer" unique_id=865818924]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "Z Pos (m)"
+horizontal_alignment = 1
+
+[node name="Label5" type="Label" parent="PlanetLineParent/LabelContainer" unique_id=1809259459]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "X Vel (m/s)"
+horizontal_alignment = 1
+
+[node name="Label6" type="Label" parent="PlanetLineParent/LabelContainer" unique_id=215886315]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "Y Vel (m/s)"
+horizontal_alignment = 1
+
+[node name="Label7" type="Label" parent="PlanetLineParent/LabelContainer" unique_id=1441036208]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "Z Vel (m/s)"
+horizontal_alignment = 1
+
+[node name="Label8" type="Label" parent="PlanetLineParent/LabelContainer" unique_id=1688581136]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "Mass (kg)"
+horizontal_alignment = 1
+
+[node name="Label9" type="Label" parent="PlanetLineParent/LabelContainer" unique_id=2004469053]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "Radius (m)"
+horizontal_alignment = 1
+
+[node name="Label10" type="Label" parent="PlanetLineParent/LabelContainer" unique_id=7035385]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "Light"
+horizontal_alignment = 1
+
+[node name="Label11" type="Label" parent="PlanetLineParent/LabelContainer" unique_id=1507051923]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+text = "Texture Path"
+horizontal_alignment = 1
+
+[node name="Label12" type="Label" parent="PlanetLineParent/LabelContainer" unique_id=229054387]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+text = "Color"
+horizontal_alignment = 1

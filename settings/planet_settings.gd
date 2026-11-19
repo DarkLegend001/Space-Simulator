@@ -16,17 +16,17 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
-	var fail_text = "Planets that failed to change:\n"
+	var fail_text = "Planets that failed to change: "
 	var any_fail = false
 	if ($SubmitButton.button_pressed):
 		for child in child_lines:
 			if (!child.confirm_values()):
 				any_fail = true
-				fail_text += child.planet.name + "\n"
+				fail_text += child.planet.name + " "
 		if (any_fail):
 			$SubmitFailLabel.text = fail_text
 		else:
 			$SubmitFailLabel.text = "All changes successful"
 	
-	if (Input.is_action_just_released("ui_cancel")):
+	if (Input.is_action_just_released("ui_cancel") or $ExitButton.button_pressed):
 		get_tree().change_scene_to_file("res://main/main.tscn")

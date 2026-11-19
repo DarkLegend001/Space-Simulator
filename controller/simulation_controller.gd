@@ -100,7 +100,7 @@ func spawn_previous_celestial_path():
 	$"../CelestialPaths".add_child(path)
 	path.color = Color.CORNFLOWER_BLUE
 	previous_paths.append(path)
-
+"text"
 func load_presets():
 	for planet in InitialPlanets.planets:
 		spawn_celestial_body(planet.name, planet.pos, planet.vel, planet.mass, planet.radius, planet.luminance, planet.color)
