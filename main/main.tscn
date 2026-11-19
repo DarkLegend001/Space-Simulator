@@ -4,8 +4,8 @@
 [ext_resource type="Script" uid="uid://dsqs3xrlrrvy4" path="res://main/camera.gd" id="2_c651c"]
 [ext_resource type="Script" uid="uid://blhqjkxxbsqqh" path="res://controller/simulation_controller.gd" id="2_kfbq2"]
 [ext_resource type="Texture2D" uid="uid://t3dsj4mralpl" path="res://assets/starmap_background.exr" id="2_xwkvk"]
-[ext_resource type="Script" uid="uid://ccup6blnahs87" path="res://main/gui.gd" id="5_3wy1v"]
-[ext_resource type="Script" uid="uid://co1anfd316w0i" path="res://main/settings.gd" id="6_kfbq2"]
+[ext_resource type="Script" uid="uid://ccup6blnahs87" path="res://main/planet_gui.gd" id="5_3wy1v"]
+[ext_resource type="Script" uid="uid://bsmrmxj5rxnpn" path="res://settings/settings.gd" id="6_kfbq2"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_c651c"]
 panorama = ExtResource("2_xwkvk")
@@ -121,8 +121,10 @@ offset_bottom = 263.0
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_top = -31.0
-offset_right = 155.0
+offset_left = 14.0
+offset_top = -48.0
+offset_right = 169.0
+offset_bottom = -17.0
 grow_vertical = 0
 text = "Show settings"
 

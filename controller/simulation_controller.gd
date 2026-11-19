@@ -16,8 +16,12 @@ var celestial_body_scene = preload("res://main/celestial_body.tscn")
 var celestial_path_scene = preload("res://rendering/celestial_path_renderer.tscn")
 
 # Called when the node enters the scene tree for the first time.
+
 func _ready() -> void:
 	main_simulation = Simulation.new()
+	if (Globals.first_load):
+		InitialPlanets.reset()
+		Globals.first_load = false
 	load_presets()
 	for i in main_simulation.celestial_bodies.size():
 		spawn_prediction_celestial_path()
@@ -96,23 +100,10 @@ func spawn_previous_celestial_path():
 	$"../CelestialPaths".add_child(path)
 	path.color = Color.CORNFLOWER_BLUE
 	previous_paths.append(path)
-
+"text"
 func load_presets():
-	var file = FileAccess.open("res://data/presets.txt", FileAccess.READ)
-	var contents = file.get_as_text().trim_suffix("\n").split("\n")
-	for line in contents:
-		if line[0] == "#":
-			continue
-		var elements = line.split(",")
-		var title = elements[0]
-		var pos = Vector3(float(elements[1]), float(elements[2]), float(elements[3]))
-		var vel = Vector3(float(elements[4]), float(elements[5]), float(elements[6]))
-		var mass = float(elements[7])
-		var radius = float(elements[8])
-		var luminance = float(elements[9])
-		var color = Color.from_rgba8(int(elements[10]), int(elements[11]), int(elements[12]), int(elements[13]))
-		
-		spawn_celestial_body(title, pos, vel, mass, radius, luminance, color)
+	for planet in InitialPlanets.planets:
+		spawn_celestial_body(planet.name, planet.pos, planet.vel, planet.mass, planet.radius, planet.luminance, planet.color)
 
 # returns a 2d array of Vector3s
 func get_predicted_curves() -> Array:

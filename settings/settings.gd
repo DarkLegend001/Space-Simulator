@@ -3,7 +3,12 @@ extends Control
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass
+	$TimeStepSlider.value = Globals.timestep
+	$GameSpeedSlider.value = Globals.speed
+	$PredictionLengthSlider.value = Globals.prediction_length
+	$PredictionTimeSlider.value = Globals.prediction_timestep
+	$StoreNumSlider.value = Globals.num_prev_positions
+	$StoreSpeedSlider.value = Globals.store_speed
 
 func handle_paused() -> void:
 	get_tree().paused = $PauseButton.button_pressed

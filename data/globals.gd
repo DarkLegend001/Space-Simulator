@@ -8,7 +8,6 @@ extends Node
 # Values close to 1 can lead to planets becoming invisible when they are too close to the camera 
 @export var planet_scaling: float = 0.5
 
-
 # timesteps per second
 @export var speed := 500
 # seconds of physics per timestep
@@ -26,3 +25,6 @@ extends Node
 @export var store_speed := 1
 # number of times previous positions are rendered per second
 @export var render_store_speed := 60
+
+
+var first_load = true
