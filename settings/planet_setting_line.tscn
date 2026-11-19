@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://cenhimtdta4pg"]
 
 [ext_resource type="Script" uid="uid://dx1ogdo6c2cls" path="res://settings/planet_setting_line.gd" id="1_qikq4"]
+[ext_resource type="Texture2D" uid="uid://cuvhhg33kuwm1" path="res://assets/XButton.png" id="2_lo87s"]
 
 [node name="PlanetBox" type="HBoxContainer" unique_id=1125776960]
 offset_right = 40.0
@@ -68,3 +69,8 @@ layout_mode = 2
 text = "Color"
 color = Color(1, 1, 1, 1)
 edit_alpha = false
+
+[node name="RemoveButton" type="Button" parent="." unique_id=1529542940]
+layout_mode = 2
+text = "Delete"
+icon = ExtResource("2_lo87s")

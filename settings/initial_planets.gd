@@ -25,8 +25,10 @@ static func reset() -> void:
 		add_planet(title, pos, vel, mass, radius, luminance, color, null)
 
 
-static func remove_planet(index) -> void:
-	planets.erase(index)
+static func remove_planet(planet) -> void:
+	planets.erase(planet)
 
-static func add_planet(name, pos, vel, mass, radius, luminance, color, texture_path) -> void:
-	planets.append(Planet.new(name, pos, vel, mass, radius, luminance, color, texture_path))
+static func add_planet(name, pos, vel, mass, radius, luminance, color, texture_path) -> Planet:
+	var planet = Planet.new(name, pos, vel, mass, radius, luminance, color, null)
+	planets.append(planet)
+	return planet

@@ -5,6 +5,12 @@ const SI_distance_constant = 1
 const SI_mass_constant = 1
 const precision = 4
 
+func _process(_delta) -> void:
+	if ($RemoveButton.button_pressed):
+		InitialPlanets.remove_planet(planet)
+		self.queue_free()
+
+
 func reset_values() -> void:
 	$NameLineEdit.text = planet.name
 	$XPosLineEdit.text = float_to_scientific_string(planet.pos.x / SI_distance_constant)
@@ -18,6 +24,38 @@ func reset_values() -> void:
 	$LuminanceLineEdit.text = float_to_scientific_string(planet.luminance)
 	$ColorPickerButton.color = planet.color
 	$TexturePathEdit.text = "null" #planet.texture
+
+func create_planet() -> Planet:
+	if ($XPosLineEdit.text.is_valid_float() and 
+			$YPosLineEdit.text.is_valid_float() and 
+			$ZPosLineEdit.text.is_valid_float() and
+			$XVelLineEdit.text.is_valid_float() and
+			$YVelLineEdit.text.is_valid_float() and
+			$ZVelLineEdit.text.is_valid_float() and
+			$MassLineEdit.text.is_valid_float() and
+			$RadiusLineEdit.text.is_valid_float() and
+			$LuminanceLineEdit.text.is_valid_float()
+		):
+		planet = InitialPlanets.add_planet(
+			$NameLineEdit.text,
+			Vector3(
+				float($XPosLineEdit.text) * SI_distance_constant,
+				float($YPosLineEdit.text) * SI_distance_constant,
+				float($ZPosLineEdit.text) * SI_distance_constant
+			),
+			Vector3(
+				float($XVelLineEdit.text) * SI_distance_constant,
+				float($YVelLineEdit.text) * SI_distance_constant,
+				float($ZVelLineEdit.text) * SI_distance_constant
+			),
+			float($MassLineEdit.text) * SI_mass_constant,
+			float($RadiusLineEdit.text) * SI_distance_constant,
+			float($LuminanceLineEdit.text),
+			$ColorPickerButton.color,
+			$TexturePathEdit.text
+		)
+		return planet
+	return null
 
 func confirm_values() -> bool:
 	if ($XPosLineEdit.text.is_valid_float() and 
