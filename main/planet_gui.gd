@@ -75,7 +75,7 @@ func update_labels():
 				$Label4.text = "Speed: " + PhysicsCalculator.get_scientific_notation((selected_body.sim_body.vel - follow_body.sim_body.vel).length())
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if selected_body == null: 
 		visible = false
 	else:

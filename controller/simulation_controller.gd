@@ -19,7 +19,9 @@ var celestial_path_scene = preload("res://rendering/celestial_path_renderer.tscn
 
 func _ready() -> void:
 	main_simulation = Simulation.new()
-	InitialPlanets.reset()
+	if (Globals.first_load):
+		InitialPlanets.reset()
+		Globals.first_load = false
 	load_presets()
 	for i in main_simulation.celestial_bodies.size():
 		spawn_prediction_celestial_path()

@@ -1,13 +1,12 @@
 class_name InitialPlanets
 
-## test doc
-static var planets = Array()
+static var planets
 
-
-static func remove_all() -> void:
+static func clear() -> void:
 	planets = Array()
 
 static func reset() -> void:
+	clear()
 	var file = FileAccess.open("res://data/presets.txt", FileAccess.READ)
 	var contents = file.get_as_text().trim_suffix("\n").split("\n")
 	for line in contents:

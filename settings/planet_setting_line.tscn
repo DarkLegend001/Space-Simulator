@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cenhimtdta4pg"]
 
-[ext_resource type="Script" uid="uid://dx1ogdo6c2cls" path="res://main/planet_setting_line.gd" id="1_qikq4"]
+[ext_resource type="Script" uid="uid://dx1ogdo6c2cls" path="res://settings/planet_setting_line.gd" id="1_qikq4"]
 
 [node name="PlanetBox" type="HBoxContainer" unique_id=1125776960]
 offset_right = 40.0
@@ -36,3 +36,11 @@ layout_mode = 2
 
 [node name="LuminanceLineEdit" type="LineEdit" parent="." unique_id=1948169216]
 layout_mode = 2
+
+[node name="TexturePathEdit" type="LineEdit" parent="." unique_id=1689915338]
+layout_mode = 2
+
+[node name="ColorPickerButton" type="ColorPickerButton" parent="." unique_id=1361509144]
+layout_mode = 2
+color = Color(1, 1, 1, 1)
+edit_alpha = false
