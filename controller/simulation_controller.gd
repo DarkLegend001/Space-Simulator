@@ -77,7 +77,7 @@ func _physics_process(delta: float) -> void:
 		main_simulation.update(Globals.timestep)
 		elapsed_update_time -= 1.0 / Globals.speed
 
-func spawn_celestial_body(name: String, pos: Vector3, vel: Vector3, mass: float, radius: float, luminance:float, color: Color):
+func spawn_celestial_body(name: String, pos: Vector3, vel: Vector3, mass: float, radius: float, luminance:float, color: Color, texture_path: String):
 	var sim_body = CelestialBodySimulation.new()
 	var body = celestial_body_scene.instantiate()
 	main_simulation.celestial_bodies.append(sim_body)
@@ -87,6 +87,13 @@ func spawn_celestial_body(name: String, pos: Vector3, vel: Vector3, mass: float,
 	body.sim_body = sim_body
 	body.get_child(0).color = color
 	body.get_child(0).luminance = luminance
+	if (texture_path != "null"):
+		var texture = load("res://assets/" + texture_path)
+		if (texture != null):
+			body.get_child(0).get_child(0).material_override = StandardMaterial3D.new()
+			body.get_child(0).get_child(0).material_override.albedo_texture = texture
+		else:
+			body.get_child(0).get_child(0).material_override = null
 	$"../CelestialBodies".add_child(body)
 
 func spawn_prediction_celestial_path():
@@ -103,7 +110,7 @@ func spawn_previous_celestial_path():
 "text"
 func load_presets():
 	for planet in InitialPlanets.planets:
-		spawn_celestial_body(planet.name, planet.pos, planet.vel, planet.mass, planet.radius, planet.luminance, planet.color)
+		spawn_celestial_body(planet.name, planet.pos, planet.vel, planet.mass, planet.radius, planet.luminance, planet.color, planet.texture_path)
 
 # returns a 2d array of Vector3s
 func get_predicted_curves() -> Array:

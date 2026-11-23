@@ -23,7 +23,7 @@ func reset_values() -> void:
 	$RadiusLineEdit.text = float_to_scientific_string(planet.radius / SI_distance_constant)
 	$LuminanceLineEdit.text = float_to_scientific_string(planet.luminance)
 	$ColorPickerButton.color = planet.color
-	$TexturePathEdit.text = "null" #planet.texture
+	$TexturePathEdit.text = planet.texture_path
 
 func create_planet() -> Planet:
 	if ($XPosLineEdit.text.is_valid_float() and 
@@ -79,7 +79,7 @@ func confirm_values() -> bool:
 		planet.radius = float($RadiusLineEdit.text) * SI_distance_constant
 		planet.luminance = float($LuminanceLineEdit.text)
 		planet.color = $ColorPickerButton.color
-		#planet.texture = $TexturePathEdit.text
+		planet.texture_path = $TexturePathEdit.text
 		return true
 	return false
 
