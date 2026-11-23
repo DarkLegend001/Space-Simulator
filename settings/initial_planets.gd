@@ -20,15 +20,15 @@ static func reset() -> void:
 		var radius = float(elements[8])
 		var luminance = float(elements[9])
 		var color = Color.from_rgba8(int(elements[10]), int(elements[11]), int(elements[12]), int(elements[13]))
-		#var texture_path = "res://assets/" + elements[14]
+		var texture_path = elements[14].strip_edges()
 		
-		add_planet(title, pos, vel, mass, radius, luminance, color, null)
+		add_planet(title, pos, vel, mass, radius, luminance, color, texture_path)
 
 
 static func remove_planet(planet) -> void:
 	planets.erase(planet)
 
 static func add_planet(name, pos, vel, mass, radius, luminance, color, texture_path) -> Planet:
-	var planet = Planet.new(name, pos, vel, mass, radius, luminance, color, null)
+	var planet = Planet.new(name, pos, vel, mass, radius, luminance, color, texture_path)
 	planets.append(planet)
 	return planet
