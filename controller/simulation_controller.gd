@@ -87,9 +87,12 @@ func spawn_celestial_body(name: String, pos: Vector3, vel: Vector3, mass: float,
 	body.sim_body = sim_body
 	body.get_child(0).color = color
 	body.get_child(0).luminance = luminance
+	
 	if (texture_path != "null"):
-		var texture = load("res://assets/" + texture_path)
-		if (texture != null):
+		var image = Image.new().load_from_file("res://assets/" + texture_path)
+		var texture = ImageTexture.new()
+		texture.set_image(image)
+		if (image != null):
 			body.get_child(0).get_child(0).material_override = StandardMaterial3D.new()
 			body.get_child(0).get_child(0).material_override.albedo_texture = texture
 		else:
