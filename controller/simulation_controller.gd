@@ -88,15 +88,14 @@ func spawn_celestial_body(name: String, pos: Vector3, vel: Vector3, mass: float,
 	body.get_child(0).color = color
 	body.get_child(0).luminance = luminance
 	
-	if (texture_path != "null"):
-		var image = Image.new().load_from_file("res://assets/" + texture_path)
-		var texture = ImageTexture.new()
-		texture.set_image(image)
-		if (image != null):
-			body.get_child(0).get_child(0).material_override = StandardMaterial3D.new()
-			body.get_child(0).get_child(0).material_override.albedo_texture = texture
-		else:
-			body.get_child(0).get_child(0).material_override = null
+	var image = Image.new().load_from_file("res://assets/" + texture_path)
+	var texture = ImageTexture.new()
+	texture.set_image(image)
+	if (image != null):
+		body.get_child(0).get_child(0).material_override = StandardMaterial3D.new()
+		body.get_child(0).get_child(0).material_override.albedo_texture = texture
+	else:
+		body.get_child(0).get_child(0).material_override = null
 	$"../CelestialBodies".add_child(body)
 
 func spawn_prediction_celestial_path():
@@ -110,7 +109,7 @@ func spawn_previous_celestial_path():
 	$"../CelestialPaths".add_child(path)
 	path.color = Color.CORNFLOWER_BLUE
 	previous_paths.append(path)
-"text"
+
 func load_presets():
 	for planet in InitialPlanets.planets:
 		spawn_celestial_body(planet.name, planet.pos, planet.vel, planet.mass, planet.radius, planet.luminance, planet.color, planet.texture_path)
