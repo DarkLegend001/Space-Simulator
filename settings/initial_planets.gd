@@ -20,7 +20,7 @@ static func reset() -> void:
 		var radius = float(elements[8])
 		var luminance = float(elements[9])
 		var color = Color.from_rgba8(int(elements[10]), int(elements[11]), int(elements[12]), int(elements[13]))
-		var texture_path = elements[14]
+		var texture_path = elements[14].strip_edges()
 		
 		add_planet(title, pos, vel, mass, radius, luminance, color, texture_path)
 
