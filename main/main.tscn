@@ -172,7 +172,7 @@ offset_bottom = 151.0
 max_value = 1000.0
 value = 100.0
 allow_greater = true
-prefix = "Simulation Timestep:"
+prefix = "Simulation timestep:"
 suffix = "s"
 custom_arrow_step = 50.0
 
@@ -184,7 +184,7 @@ offset_right = 150.0
 offset_bottom = 181.0
 value = 100.0
 allow_greater = true
-prefix = "Simulation Speed:"
+prefix = "Simulation speed:"
 suffix = "Hz"
 custom_arrow_step = 50.0
 
@@ -209,7 +209,7 @@ offset_bottom = 241.0
 max_value = 100000.0
 value = 36000.0
 allow_greater = true
-prefix = "Prediction Timestep:"
+prefix = "Prediction timestep:"
 suffix = "s"
 
 [node name="StoreNumSlider" type="SpinBox" parent="Settings" unique_id=1720038272]
@@ -221,7 +221,7 @@ offset_bottom = 271.0
 max_value = 100000.0
 value = 300.0
 allow_greater = true
-prefix = "Store timsteps:"
+prefix = "Store timesteps:"
 
 [node name="StoreSpeedSlider" type="SpinBox" parent="Settings" unique_id=976973689]
 custom_minimum_size = Vector2(250, 0)
@@ -231,5 +231,5 @@ offset_right = 86.5
 offset_bottom = 301.0
 value = 10.0
 allow_greater = true
-prefix = "Position Storing:"
+prefix = "Position storing:"
 suffix = "Hz"
