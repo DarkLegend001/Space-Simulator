@@ -18,7 +18,7 @@ The orbital parameters of Mars relative to the Sun.
 <img width="1917" height="1105" alt="image" src="https://github.com/user-attachments/assets/ffac3a35-65c2-4030-9ec4-6025ecc0b3b5" />
 
 The settings menu with background and dynamic lighting disabled.
-<img width="1917" height="1105" alt="image" src="https://github.com/user-attachments/assets/fa84a84c-8f69-48e6-a5e9-7a4b198638bf" />
+<img width="1917" height="1105" alt="image" src="https://github.com/user-attachments/assets/e7927f5b-dceb-47ce-a7d5-6d368569c4c6" />
 
 The default planets in the simulation menu.
 <img width="1917" height="1105" alt="image" src="https://github.com/user-attachments/assets/221695dc-bd8e-42b7-8e44-94c96d37e9ee" />
