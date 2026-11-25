@@ -12,7 +12,7 @@ A top down view of the demo solar system.
 <img width="1917" height="1105" alt="image" src="https://github.com/user-attachments/assets/c2d22305-7b36-44ef-b9af-b69ffaf367e0" />
 
 Following the earth, the moon has a relative path.
-<img width="1917" height="1105" alt="image" src="https://github.com/user-attachments/assets/0bc94af5-4781-4b31-9dd3-954a71dd7609" />
+<img width="1917" height="1105" alt="image" src="https://github.com/user-attachments/assets/e793f7b7-f3ef-43b9-9f96-c90718e053db" />
 
 The orbital parameters of Mars relative to the Sun.
 <img width="1917" height="1105" alt="image" src="https://github.com/user-attachments/assets/ffac3a35-65c2-4030-9ec4-6025ecc0b3b5" />
